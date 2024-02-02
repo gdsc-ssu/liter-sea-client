@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import Header from "./components/Header/Header";
 
 function Router() {
   return (
     <BrowserRouter>
+      <Header />
       <Layout>
         <Routes>
           <Route path="/" element={<div>main</div>} />
