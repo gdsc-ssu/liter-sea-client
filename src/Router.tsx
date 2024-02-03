@@ -3,6 +3,7 @@ import Layout from "./components/Layout/Layout";
 import Header from "./components/Header/Header";
 import Multiple from "./pages/StageCheck/Multiple";
 import Vocabulary from "./pages/StageCheck/Vocabulary";
+import ResultLoading from "./pages/ResultLoading/ResultLoading";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
           <Route path="/stage/2" element={<Vocabulary />} />
           <Route path="/summary" element={<div>summary</div>} />
           <Route path="/vocabulary" element={<div>vocabulary</div>} />
+          <Route path="/loading" element={<ResultLoading />} />
         </Routes>
       </Layout>
     </BrowserRouter>
