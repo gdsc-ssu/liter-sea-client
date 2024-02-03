@@ -1,7 +1,7 @@
 import TestLayout from "@/components/Layout/TestLayout";
 
-const StageCheck = () => {
+const Multiple = () => {
   return <TestLayout></TestLayout>;
 };
 
-export default StageCheck;
+export default Multiple;
