@@ -6,6 +6,7 @@ import Vocabulary from "./pages/Stage/StageCheck/Vocabulary";
 import ResultLoading from "./pages/ResultLoading/ResultLoading";
 import StageResult from "./pages/Stage/Result/StageResult";
 import TodaySummary from "./pages/TodaySummary/TodaySummary";
+import SummaryResult from "./pages/TodaySummary/SummaryResult";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
 
           {/** 오늘의 요약 */}
           <Route path="/summary/1" element={<TodaySummary />} />
+          <Route path="/summary/result" element={<SummaryResult />} />
           <Route path="/vocabulary" element={<div>vocabulary</div>} />
           <Route path="/loading" element={<ResultLoading />} />
         </Routes>
