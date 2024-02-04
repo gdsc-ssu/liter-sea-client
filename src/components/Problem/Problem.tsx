@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLORS } from "@/styles/colors";
-import NextButton from "../Button/NextButton";
 
 interface ProblemProps {
   title: string;
@@ -14,7 +13,6 @@ const Problem = ({ title, children }: ProblemProps) => {
         <ProblemTitle>{title}</ProblemTitle>
         <AnswerBox>{children}</AnswerBox>
       </Container>
-      <NextButton text="다음 문제 풀기" />
     </>
   );
 };
