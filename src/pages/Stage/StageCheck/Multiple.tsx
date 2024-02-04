@@ -3,6 +3,7 @@ import { COLORS } from "@/styles/colors";
 import Text from "@/components/Text/Text";
 import StateStage from "@/components/StateStage/StateStage";
 import Problem from "@/components/Problem/Problem";
+import NextButton from "@/components/Button/NextButton";
 
 const Multiple = () => {
   return (
@@ -23,6 +24,7 @@ const Multiple = () => {
             <NumberTextBox>2</NumberTextBox>
           </MultipleBox>
         </Problem>
+        <NextButton text="다음 문제 풀기" />
       </ProblemBox>
     </Container>
   );
