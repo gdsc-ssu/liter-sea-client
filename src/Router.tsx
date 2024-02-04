@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Header from "./components/Header/Header";
+import Multiple from "./pages/Stage/StageCheck/Multiple";
+import Vocabulary from "./pages/Stage/StageCheck/Vocabulary";
+import ResultLoading from "./pages/ResultLoading/ResultLoading";
+import StageResult from "./pages/Stage/Result/StageResult";
 
 function Router() {
   return (
@@ -12,9 +16,12 @@ function Router() {
           <Route path="/signin" element={<div>signin</div>} />
           <Route path="/review" element={<div>review</div>} />
           <Route path="/signout" element={<div>signout</div>} />
-          <Route path="/stage" element={<div>stage</div>} />
+          <Route path="/stage/1" element={<Multiple />} />
+          <Route path="/stage/2" element={<Vocabulary />} />
+          <Route path="/stage/result" element={<StageResult />} />
           <Route path="/summary" element={<div>summary</div>} />
           <Route path="/vocabulary" element={<div>vocabulary</div>} />
+          <Route path="/loading" element={<ResultLoading />} />
         </Routes>
       </Layout>
     </BrowserRouter>
