@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import StateStage from "@/components/StateStage/StateStage";
 import Problem from "@/components/Problem/Problem";
+import InputComponent from "@/components/AnswerInput/InputComponent";
 
 const Vocabulary = () => {
   return (
@@ -10,7 +11,7 @@ const Vocabulary = () => {
         <StateStage number={1} />
 
         <Problem title={"다음 단어의 의미를 설명하시오"}>
-          <AnswerInput placeholder="내 답변" />
+          <InputComponent placeholder="내 답변" />
         </Problem>
       </ProblemBox>
     </Container>
@@ -31,9 +32,5 @@ const TextBox = styled.div`
 `;
 
 const ProblemBox = styled.div``;
-
-const AnswerInput = styled.input`
-  width: 100%;
-`;
 
 export default Vocabulary;
