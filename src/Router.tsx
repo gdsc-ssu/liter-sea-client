@@ -8,6 +8,7 @@ import StageResult from "./pages/Stage/Result/StageResult";
 import TodaySummary from "./pages/TodaySummary/TodaySummary";
 import SummaryResult from "./pages/TodaySummary/SummaryResult";
 import ReviewNote from "./pages/ReviewNote/ReviewNote";
+import Summary from "./pages/ReviewNote/Summary";
 
 function Router() {
   return (
@@ -30,6 +31,7 @@ function Router() {
 
           {/* 복습 노트 */}
           <Route path="/review" element={<ReviewNote />} />
+          <Route path="/review/1" element={<Summary />} />
 
           <Route path="/vocabulary" element={<div>vocabulary</div>} />
 
