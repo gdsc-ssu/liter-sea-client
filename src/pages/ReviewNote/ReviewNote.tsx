@@ -1,12 +1,24 @@
 import styled from "styled-components";
 import ReviewList, * as RLstyled from "@/components/List/ReviewList";
 import { COLORS } from "@/styles/colors";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 
 const ReviewNote = () => {
+  const today = new Date();
+  const [selectDate, setSelectDate] = useState<Date>(today);
   return (
     <Container>
       <TitleBox>복습 노트</TitleBox>
-      <DateBox></DateBox>
+      <DateBox>
+        <StyledDatePicker
+          dateFormat="yyyy.MM.dd"
+          selected={selectDate}
+          closeOnScroll={true} // 스크롤을 움직였을 때 자동으로 닫히도록 설정 기본값 false
+          onChange={(date: Date) => setSelectDate(date)}
+        />
+      </DateBox>
       <ListBox>
         <ListTitle>
           <RLstyled.NumberBox>번호</RLstyled.NumberBox>
@@ -31,11 +43,11 @@ const Container = styled.div`
 const TitleBox = styled.div``;
 
 const DateBox = styled.div`
-  margin-top: 3rem;
+  margin-top: 1rem;
 `;
 
 const ListBox = styled.div`
-  margin-top: 3rem;
+  margin-top: 1rem;
   border: 1px solid ${COLORS.primary};
   border-radius: 10px;
   padding: 1rem;
@@ -46,6 +58,15 @@ const ListTitle = styled.div`
   height: 5rem;
   align-items: center;
   border-bottom: 1px solid ${COLORS.blue};
+`;
+
+const StyledDatePicker = styled(DatePicker)`
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 20px;
+  background-color: transparent;
+  color: #707070;
 `;
 
 export default ReviewNote;
