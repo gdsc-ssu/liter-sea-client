@@ -4,12 +4,13 @@ import { COLORS } from "@/styles/colors";
 interface ProblemProps {
   title: string;
   children: React.ReactNode;
+  height?: string;
 }
 
-const Problem = ({ title, children }: ProblemProps) => {
+const Problem = ({ title, children, height = "35rem" }: ProblemProps) => {
   return (
     <>
-      <Container>
+      <Container style={{ height: `${height}` }}>
         <ProblemTitle>{title}</ProblemTitle>
         <AnswerBox>{children}</AnswerBox>
       </Container>
@@ -20,7 +21,6 @@ const Problem = ({ title, children }: ProblemProps) => {
 const Container = styled.div`
   background-color: ${COLORS.primary};
   width: 32rem;
-  height: 35rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 `;
