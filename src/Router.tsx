@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Header from "./components/Header/Header";
+import Vocabulary from "./pages/Vocabulary/Vocabulary";
 
 function Router() {
   return (
@@ -14,7 +15,7 @@ function Router() {
           <Route path="/signout" element={<div>signout</div>} />
           <Route path="/stage" element={<div>stage</div>} />
           <Route path="/summary" element={<div>summary</div>} />
-          <Route path="/vocabulary" element={<div>vocabulary</div>} />
+          <Route path="/vocabulary" element={<Vocabulary/>} />
         </Routes>
       </Layout>
     </BrowserRouter>
