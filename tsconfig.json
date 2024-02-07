@@ -19,8 +19,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
   },
-  "include": ["src", "**/*.ts", "**/*.tsx", "src/@types"],
+  "include": ["src", "**/*.ts", "**/*.tsx", "src/@types", "svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
