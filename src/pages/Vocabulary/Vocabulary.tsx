@@ -5,6 +5,7 @@ import ModalPortal from "@/components/Modals/ModalPortal";
 import NewVocabookModal from "@/components/Modals/NewVocabookModal";
 import { useState } from "react";
 import VocabookDeleteButton from "@/assets/SVGs/VocabookDeleteButton.svg?react";
+import { useNavigate } from "react-router-dom";
 
 const BOOK_LIST = [
   { title: "단어장1", id: "1" },
@@ -13,6 +14,8 @@ const BOOK_LIST = [
 ];
 
 const Vocabulary = ({}) => {
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -29,9 +32,15 @@ const Vocabulary = ({}) => {
   }
 
   function handleSettingButton() {
-    const vocabook = document.querySelector("#VocabookDeleteButton");
-    vocabook?.toggleAttribute("hidden");
-    setIsEditMode(true);
+    var currentMode = isEditMode;
+    setIsEditMode(!currentMode);
+  }
+
+  function handleVocabook(event: React.MouseEvent<HTMLElement, MouseEvent>) {
+    const targetEvent = event?.currentTarget;
+    navigate("/vocabulary/id", {
+      state: BOOK_LIST[parseInt(targetEvent.id) - 1],
+    });
   }
 
   return (
@@ -45,11 +54,20 @@ const Vocabulary = ({}) => {
       <Container>
         {BOOK_LIST.map((item, index) => (
           <>
-            <Vocabook key={index} title={item.title} id={item.id} />
-            <VocabookDeleteButton
-              id="VocabookDeleteButton"
-              className="hidden"
+            <Vocabook
+              key={index}
+              title={item.title}
+              id={item.id}
+              onClickVocabook={handleVocabook}
             />
+            {isEditMode ? (
+              <VocabookDeleteButton
+                id="VocabookDeleteButton"
+                className="hidden"
+              />
+            ) : (
+              <></>
+            )}
           </>
         ))}
       </Container>
@@ -74,8 +92,6 @@ const TitleContainer = styled.div`
   margin: 40px auto 0px;
   width: 1080px;
 `;
-
-export default Vocabulary;
 
 const LayoutTitle = styled.div`
   color: black;
@@ -104,4 +120,6 @@ const CreateVocabookButton = styled.button`
   padding: 18px;
 `;
 
-const VocabookSettingButton = styled.div``;
+const VocabookSettingButton = styled.button``;
+
+export default Vocabulary;

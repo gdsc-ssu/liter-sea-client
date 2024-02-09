@@ -9,6 +9,9 @@ import TodaySummary from "./pages/TodaySummary/TodaySummary";
 import SummaryResult from "./pages/TodaySummary/SummaryResult";
 import ReviewNote from "./pages/ReviewNote/ReviewNote";
 import Summary from "./pages/ReviewNote/Summary";
+import Vocabook from "./pages/Vocabulary/Vocabulary";
+import VocabookContents from "./pages/Vocabulary/VocabularyContents";
+import VocabookStudy from "./pages/Vocabulary/VocabularyStudy";
 
 function Router() {
   return (
@@ -33,7 +36,10 @@ function Router() {
           <Route path="/review" element={<ReviewNote />} />
           <Route path="/review/1" element={<Summary />} />
 
-          <Route path="/vocabulary" element={<div>vocabulary</div>} />
+          {/* 단어장 */}
+          <Route path="/vocabulary" element={<Vocabook />} />
+          <Route path="/vocabulary/id" element={<VocabookContents />} />
+          <Route path="/vocabulary/id/study" element={<VocabookStudy />} />
 
           <Route path="/loading" element={<ResultLoading />} />
         </Routes>
