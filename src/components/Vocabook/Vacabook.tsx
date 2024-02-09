@@ -3,12 +3,13 @@ import styled from "styled-components";
 interface VacabookProps {
   title: string;
   id: string;
+  onClickVocabook: () => void;
 }
 
-const Vocabook = ({ title, id }: VacabookProps) => {
+const Vocabook = ({ title, id, onClickVocabook }: VacabookProps) => {
   return (
     <>
-      <Container>
+      <Container onClick={onClickVocabook} id={id}>
         <BookTitle>{title}</BookTitle>
       </Container>
     </>
