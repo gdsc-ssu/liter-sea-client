@@ -12,6 +12,7 @@ import Summary from "./pages/ReviewNote/Summary";
 import Vocabook from "./pages/Vocabulary/Vocabulary";
 import VocabookContents from "./pages/Vocabulary/VocabularyContents";
 import VocabookStudy from "./pages/Vocabulary/VocabularyStudy";
+import Main from "./pages/Main/Main";
 
 function Router() {
   return (
@@ -19,7 +20,7 @@ function Router() {
       <Header />
       <Layout>
         <Routes>
-          <Route path="/" element={<div>main</div>} />
+          <Route path="/" element={<Main />} />
           <Route path="/signin" element={<div>signin</div>} />
           <Route path="/signout" element={<div>signout</div>} />
 

@@ -42,9 +42,4 @@ export const NameBox = styled.div`
   margin-right: 1rem;
 `;
 
-export const ProfileImgBox = styled.div`
-  width: 2rem;
-  height: 2rem;
-  background-color: black;
-  margin-right: 1rem;
-`;
+export const ProfileImgBox = styled.div``;
