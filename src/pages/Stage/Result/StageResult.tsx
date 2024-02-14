@@ -1,83 +1,81 @@
 import styled from "styled-components";
 import { COLORS } from "@/styles/colors";
 import BlueButton from "@/components/Button/BlueButton";
+import FlexContainer from "@/components/common/flex-container";
 
 const StageResult = () => {
-  const handleOnClick = () => {};
+	const handleOnClick = () => {};
 
-  return (
-    <Container>
-      <LeftBox>이미지</LeftBox>
-      <RightBox>
-        <TopTitle>테스트 결과</TopTitle>
-        <ResultBox>
-          <ResultComponent>
-            <ResultTitle>수필</ResultTitle>
-            <ResultBar></ResultBar>
-          </ResultComponent>
-          <ResultComponent>
-            <ResultTitle>수능 비문학</ResultTitle>
-            <ResultBar></ResultBar>
-          </ResultComponent>
-          <ResultComponent>
-            <ResultTitle>보고서</ResultTitle>
-            <ResultBar></ResultBar>
-          </ResultComponent>
-          <ResultComponent>
-            <ResultTitle>뉴스 기사 생활</ResultTitle>
-            <ResultBar></ResultBar>
-          </ResultComponent>
-          <ResultComponent>
-            <ResultTitle>뉴스 기사 경제 / 과학</ResultTitle>
-            <ResultBar></ResultBar>
-          </ResultComponent>
-        </ResultBox>
-        <ResultCommenet>수필부터 시작해요</ResultCommenet>
-        <BlueButton text="시작하기" onClickFunc={handleOnClick} />
-      </RightBox>
-    </Container>
-  );
+	return (
+		<FlexContainer gap={2} wrap="wrap">
+			<div style={{ minWidth: "20rem" }}>이미지</div>
+			<FlexItem fullWidth gap={4}>
+				<FlexContainer direction="column" alignItems="flex-start">
+					<div style={{ fontWeight: 600 }}>테스트 결과</div>
+					<FlexContainer
+						direction="column"
+						alignItems="stretch"
+						fullWidth
+						padding={2}
+						style={{ backgroundColor: `${COLORS.boxBg}` }}
+						gap={2}
+					>
+						<ResultComponent>
+							<ResultTitle>수필</ResultTitle>
+							<ResultBar></ResultBar>
+						</ResultComponent>
+						<ResultComponent>
+							<ResultTitle>수능 비문학</ResultTitle>
+							<ResultBar></ResultBar>
+						</ResultComponent>
+						<ResultComponent>
+							<ResultTitle>보고서</ResultTitle>
+							<ResultBar></ResultBar>
+						</ResultComponent>
+						<ResultComponent>
+							<ResultTitle>뉴스 기사 생활</ResultTitle>
+							<ResultBar></ResultBar>
+						</ResultComponent>
+						<ResultComponent>
+							<ResultTitle>뉴스 기사 경제 / 과학</ResultTitle>
+							<ResultBar></ResultBar>
+						</ResultComponent>
+					</FlexContainer>
+				</FlexContainer>
+				<FlexContainer direction="column" alignItems="stretch">
+					<span style={{ textAlign: "center" }}>
+						<b>수필</b>부터 시작해요
+					</span>
+					<BlueButton text="시작하기" onClickFunc={handleOnClick} />
+				</FlexContainer>
+			</FlexItem>
+		</FlexContainer>
+	);
 };
 
-const Container = styled.div`
-  display: flex;
-  padding: 5rem;
-  justify-content: center;
+const FlexItem = styled(FlexContainer).attrs({
+	direction: "column",
+	alignItems: "stretch",
+	alignSelf: "stretch",
+})`
+	flex: 1 1 40%;
 `;
 
-const LeftBox = styled.div`
-  width: 30rem;
+const ResultComponent = styled(FlexContainer).attrs({
+	direction: "column",
+	alignItems: "flex-start",
+})``;
+
+const ResultTitle = styled.div`
+	font-size: 1.4rem;
 `;
-
-const RightBox = styled.div``;
-
-const TopTitle = styled.div``;
-
-const ResultBox = styled.div`
-  background-color: ${COLORS.primary};
-  width: 25rem;
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 5rem;
-`;
-
-const ResultComponent = styled.div`
-  padding: 1rem 0;
-`;
-
-const ResultTitle = styled.div``;
 
 const ResultBar = styled.div`
-  background-color: ${COLORS.ligthGray};
-  width: 15rem;
-  height: 1.2rem;
-`;
+	background-color: ${COLORS.lightGray};
 
-const ResultCommenet = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0;
+	width: 100%;
+	height: 0.8rem;
+	border-radius: 0.8rem;
 `;
 
 export default StageResult;
