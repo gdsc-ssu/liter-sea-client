@@ -18,18 +18,16 @@ const Vocabook = ({ title, id, onClickVocabook }: VacabookProps) => {
 };
 
 const Container = styled.div`
-	background-color: ${COLORS.primaryDim};
-	width: 400px;
-	height: 64px;
-	margin-bottom: 36px;
-	border-radius: 0.8rem;
 	display: flex;
-	justify-content: flex-start;
-	align-items: center;
+	background-color: ${COLORS.white};
+
+	flex: 1 1 40%;
+
+	border-radius: 0.8rem;
 `;
 
 const BookTitle = styled.div`
 	color: ${COLORS.black};
-	padding-left: 30px;
+	padding: 1.5rem;
 `;
 export default Vocabook;

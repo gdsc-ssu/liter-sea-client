@@ -4,70 +4,58 @@ import Problem from "@/components/Problem/Problem";
 import InputComponent from "@/components/AnswerInput/InputComponent";
 import BlueButton from "@/components/Button/BlueButton";
 import { COLORS } from "@/styles/colors";
+import FlexContainer from "@/components/common/flex-container";
 
 const Summary = () => {
 	const handleOnClick = () => {};
 	return (
-		<Container>
-			<TextBox>
+		<FlexContainer gap={2} wrap="wrap">
+			<FlexItem gap={2}>
 				<Text />
-			</TextBox>
-			<ProblemBox>
+			</FlexItem>
+			<FlexItem fullWidth>
 				<ScoreBox>80점</ScoreBox>
-				<Problem title={"내 요약"} height="15rem">
+				<Problem title={"내 요약"}>
 					<InputComponent placeholder="내 요약" />
 				</Problem>
-				<Problem title={"모범 답안"} height="15rem">
+				<Problem title={"모범 답안"}>
 					<AnswerBox>
 						한국전쟁은 1950년 6월 25일 북한의 남침으로 시작된 전쟁입니다. 전쟁은
 						3년 동안 지속되었고, 결국 한국의 승리로 끝났습니다. 한국전쟁은
 						한국의 역사에 큰 영향을 미친 사건입니다.
 					</AnswerBox>
 				</Problem>
-				<ButtonBox>
+				<FlexContainer fullWidth justifyContent="space-evenly">
 					<ArrowBox>이전</ArrowBox>
-					<div style={{ width: "20rem" }}>
-						<BlueButton text="핵심문장 찾기" onClickFunc={handleOnClick} />
-					</div>
+					<BlueButton text="핵심문장 찾기" onClickFunc={handleOnClick} />
 					<ArrowBox>다음</ArrowBox>
-				</ButtonBox>
-			</ProblemBox>
-		</Container>
+				</FlexContainer>
+			</FlexItem>
+		</FlexContainer>
 	);
 };
 
-const Container = styled.div`
-	padding: 3rem;
-	display: flex;
-	justify-content: center;
-`;
-
-const TextBox = styled.div`
-	margin-right: 100px;
-	margin-top: 4rem;
-`;
-
-const ProblemBox = styled.div`
-	display: flex;
-	margin-top: 4rem;
-	flex-direction: column;
+const FlexItem = styled(FlexContainer).attrs({
+	direction: "column",
+	alignItems: "stretch",
+	alignSelf: "stretch",
+})`
+	flex: 1 1 40%;
 `;
 
 const ScoreBox = styled.div`
-	display: flex;
-	margin-left: auto;
+	align-self: flex-end;
+	font-size: 1.4rem;
+	color: ${COLORS.primary};
 `;
 
 const AnswerBox = styled.div`
 	background-color: ${COLORS.white};
-	width: 100%;
+	border-radius: 0.8rem;
+	border: 1px solid ${COLORS.lightGray};
 	padding: 1rem;
-`;
-
-const ButtonBox = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	font-size: 1.4rem;
+	line-height: 1.6;
 `;
 
 const ArrowBox = styled.div`

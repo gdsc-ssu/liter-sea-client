@@ -1,6 +1,7 @@
 import { COLORS } from "@/styles/colors";
 import React, { ChangeEvent, useState, FormEvent } from "react";
 import styled from "styled-components";
+import FlexContainer from "../common/flex-container";
 
 type ModalProps = {
 	onClose: () => void;
@@ -58,11 +59,9 @@ const ModalBody = styled.div`
 	transform: translate(-50%, -50%);
 `;
 
-const ModalContent = styled.div`
+const ModalContent = styled(FlexContainer)`
 	background-color: ${COLORS.white};
-	padding: 1rem;
-	width: 400px;
-	height: auto;
+
 	border-radius: 0.8rem;
 `;
 
@@ -71,28 +70,32 @@ const NewVocabookForm = styled.form`
 	flex-direction: column;
 	flex-wrap: nowrap;
 	align-items: center;
+	gap: 2rem;
+
+	padding: 3rem 7rem;
 `;
 
 const ExitButton = styled.button`
 	color: ${COLORS.black};
-	transform: translate(170px, 0);
+	align-self: flex-end;
 `;
 
 const NewVocabookInput = styled.input`
-	background-color: ${COLORS.primaryDim};
+	background-color: ${COLORS.white};
 	border-radius: 0.8rem;
-	border-style: none;
-	padding: 10px 20px;
-	margin: 20px 0px 20px 0px;
-	text-align: left;
+	border: 1px solid ${COLORS.lightGray};
+	padding: 2rem 10rem;
+
 	color: ${COLORS.black};
+
+	font-size: 1.4rem;
 `;
 
 const NewVocabookButton = styled.button`
 	background-color: ${COLORS.primary};
-	padding: 10px 80px;
+	padding: 1rem;
 	border-radius: 0.8rem;
-	text-align: center;
+	align-self: stretch;
 `;
 
 export default NewVocabookModal;

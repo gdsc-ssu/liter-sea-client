@@ -1,5 +1,6 @@
 import { COLORS } from "@/styles/colors";
 import styled from "styled-components";
+import FlexContainer from "../common/flex-container";
 
 interface WordCardProps {
 	word: string;
@@ -9,7 +10,7 @@ interface WordCardProps {
 
 const WordCard = ({ word, meaning, example }: WordCardProps) => {
 	return (
-		<Content>
+		<Content direction="column" padding={4}>
 			<WordName>{word}</WordName>
 			<WordMeaning>{meaning}</WordMeaning>
 			<WordExample>{example}</WordExample>
@@ -19,18 +20,11 @@ const WordCard = ({ word, meaning, example }: WordCardProps) => {
 
 export default WordCard;
 
-const Content = styled.div`
-	width: 1080px;
-	height: 400px;
+const Content = styled(FlexContainer)`
 	border-radius: 0.8rem;
 	color: ${COLORS.black};
-	margin: 10px 0px;
-	padding: 10px;
-	background-color: ${COLORS.primaryDim};
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+
+	background-color: ${COLORS.boxBg};
 `;
 
 const WordName = styled.div``;

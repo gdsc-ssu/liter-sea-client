@@ -17,8 +17,9 @@ const VocaModal = ({ word }: VMProps) => {
 
 const Container = styled(FlexContainer)`
 	background-color: ${COLORS.white};
-	box-shadow: 0 15px 30px 0 rgba(212, 216, 229, 0.3),
-		0 0 1px 0 rgba(0, 0, 0, 0.4);
+	border: 1px solid ${COLORS.primary};
+	box-shadow: 0 20px 30px 0 rgba(164, 186, 255, 0.3),
+		0 0 2px 0 rgba(103, 121, 219, 0.4);
 
 	position: sticky;
 	bottom: 3.4rem;

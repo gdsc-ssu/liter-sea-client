@@ -1,5 +1,6 @@
 import { COLORS } from "@/styles/colors";
 import styled from "styled-components";
+import FlexContainer from "../common/flex-container";
 
 interface WordContentProps {
 	word: string;
@@ -9,7 +10,7 @@ interface WordContentProps {
 
 const WordContent = ({ word, meaning, example }: WordContentProps) => {
 	return (
-		<Content>
+		<Content direction="column" alignItems="stretch" fullWidth padding={2}>
 			<WordName>{word}</WordName>
 			<WordMeaning>{meaning}</WordMeaning>
 			<WordExample>{example}</WordExample>
@@ -19,15 +20,10 @@ const WordContent = ({ word, meaning, example }: WordContentProps) => {
 
 export default WordContent;
 
-const Content = styled.div`
-	width: 1200px;
-	height: 140px;
-	border: solid 2px;
-	border-color: ${COLORS.primaryDim};
+const Content = styled(FlexContainer)`
+	border: solid 1px ${COLORS.primaryDim};
 	border-radius: 0.8rem;
 	color: ${COLORS.black};
-	margin: 10px 0px;
-	padding: 10px;
 `;
 
 const WordName = styled.div``;

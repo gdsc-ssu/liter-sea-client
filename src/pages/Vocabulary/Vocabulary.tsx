@@ -7,6 +7,7 @@ import { useState } from "react";
 import VocabookDeleteButton from "@/assets/SVGs/VocabookDeleteButton.svg?react";
 import { useNavigate } from "react-router-dom";
 import { COLORS } from "@/styles/colors";
+import FlexContainer from "@/components/common/flex-container";
 
 const BOOK_LIST = [
 	{ title: "단어장1", id: "1" },
@@ -45,82 +46,68 @@ const Vocabulary = ({}) => {
 	}
 
 	return (
-		<>
-			<TitleContainer>
-				<LayoutTitle>단어장</LayoutTitle>
+		<FlexContainer direction="column" alignItems="stretch">
+			<div style={{ fontWeight: 600 }}>단어장</div>
+			<FlexContainer
+				direction="column"
+				style={{ background: `${COLORS.boxBg}` }}
+				padding={2}
+				gap={3}
+				alignItems="stretch"
+			>
 				<VocabookSettingButton onClick={handleSettingButton}>
 					<VocabookSetting />
 				</VocabookSettingButton>
-			</TitleContainer>
-			<Container>
-				{BOOK_LIST.map((item, index) => (
-					<>
-						<Vocabook
-							key={index}
-							title={item.title}
-							id={item.id}
-							onClickVocabook={handleVocabook}
-						/>
-						{isEditMode ? (
-							<VocabookDeleteButton
-								id="VocabookDeleteButton"
-								className="hidden"
+				<Container gap={2} wrap="wrap">
+					{BOOK_LIST.map((item, index) => (
+						<FlexContainer gap={0.5} fullWidth>
+							<Vocabook
+								key={index}
+								title={item.title}
+								id={item.id}
+								onClickVocabook={handleVocabook}
 							/>
-						) : (
-							<></>
-						)}
-					</>
-				))}
-			</Container>
-			<CreateVocabookButton onClick={handleOpenModal}>
-				+ 새 단어장 추가
-			</CreateVocabookButton>
-			{isOpen && (
-				<ModalPortal>
-					<NewVocabookModal
-						onClose={handleCloseModal}
-						onCreate={handleCreateModal}
-					/>
-				</ModalPortal>
-			)}
-		</>
+							{isEditMode ? (
+								<VocabookDeleteButton
+									id="VocabookDeleteButton"
+									className="hidden"
+								/>
+							) : (
+								" "
+							)}
+						</FlexContainer>
+					))}
+				</Container>
+				<CreateVocabookButton onClick={handleOpenModal}>
+					+ 새 단어장 추가
+				</CreateVocabookButton>
+				{isOpen && (
+					<ModalPortal>
+						<NewVocabookModal
+							onClose={handleCloseModal}
+							onCreate={handleCreateModal}
+						/>
+					</ModalPortal>
+				)}
+			</FlexContainer>
+		</FlexContainer>
 	);
 };
 
-const TitleContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	margin: 40px auto 0px;
-	width: 1080px;
-`;
-
-const LayoutTitle = styled.div`
-	color: ${COLORS.black};
-`;
-
-const Container = styled.div`
-	margin: 40px auto;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	align-content: flex-start;
-	width: 1080px;
-	height: 600px;
+const Container = styled(FlexContainer)`
 	border-radius: 0.8rem;
-	border: dashed 2px ${COLORS.primaryDim};
-	padding: 60px 80px;
 `;
 
 const CreateVocabookButton = styled.button`
 	background-color: ${COLORS.primary};
 	color: ${COLORS.white};
-	width: 500px;
+
 	border-radius: 0.8rem;
-	margin: -150px auto;
-	padding: 18px;
+	padding: 1rem;
 `;
 
-const VocabookSettingButton = styled.button``;
+const VocabookSettingButton = styled.button`
+	align-self: flex-start;
+`;
 
 export default Vocabulary;

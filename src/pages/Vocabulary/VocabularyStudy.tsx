@@ -4,6 +4,7 @@ import styled from "styled-components";
 import WordCard from "@/components/Vocabook/WordCard";
 import { useState, useEffect } from "react";
 import { COLORS } from "@/styles/colors";
+import FlexContainer from "@/components/common/flex-container";
 
 const VocabularyStudy = () => {
 	const [index, setIndex] = useState(0);
@@ -42,26 +43,33 @@ const VocabularyStudy = () => {
 	}
 
 	return (
-		<>
+		<FlexContainer direction="column" gap={3} alignItems="stretch">
 			<BackButton onClick={handleGoToBack} />
-			<PageTitle>{location.state.title}</PageTitle>
-			<CardContainer>
-				<CurrentIndex>
-					{index + 1} / {wordCardData.length}
-				</CurrentIndex>
+			<FlexContainer direction="column">
+				<FlexContainer justifyContent="space-between">
+					<PageTitle>{location.state.title}</PageTitle>
+					<CurrentIndex>
+						{index + 1} / {wordCardData.length}
+					</CurrentIndex>
+				</FlexContainer>
 				<WordCard
 					word={wordCardData[index].word}
 					meaning={wordCardData[index].meaning}
 					example={wordCardData[index].example}
 				/>
-			</CardContainer>
-			<PlayBarContainer>
+			</FlexContainer>
+
+			<FlexContainer alignSelf="center" gap={1.5} direction="column">
 				<IntervalController>재생간격 {sec} 초</IntervalController>
-				<PriorCardButton onClick={handlePriorCard}>⏪</PriorCardButton>
-				<PlayButton onClick={handlePlayButton}>{isPlay ? "▶" : "⏸"}</PlayButton>
-				<NextCardButton onClick={handleNextCard}>⏩</NextCardButton>
-			</PlayBarContainer>
-		</>
+				<FlexContainer alignSelf="center" gap={4}>
+					<PriorCardButton onClick={handlePriorCard}>⏪</PriorCardButton>
+					<PlayButton onClick={handlePlayButton}>
+						{isPlay ? "▶" : "⏸"}
+					</PlayButton>
+					<NextCardButton onClick={handleNextCard}>⏩</NextCardButton>
+				</FlexContainer>
+			</FlexContainer>
+		</FlexContainer>
 	);
 };
 
@@ -71,26 +79,12 @@ const PageTitle = styled.div`
 	color: ${COLORS.black};
 `;
 
-const CardContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-const CurrentIndex = styled.div`
+const CurrentIndex = styled.span`
 	color: ${COLORS.black};
+	align-self: flex-end;
 `;
 
-const PlayBarContainer = styled.div`
-	color: ${COLORS.black};
-	display: flex;
-	justify-content: center;
-`;
-
-const IntervalController = styled.div`
-	position: absolute;
-	left: 100px;
-`;
+const IntervalController = styled.div``;
 
 const PriorCardButton = styled.button``;
 
