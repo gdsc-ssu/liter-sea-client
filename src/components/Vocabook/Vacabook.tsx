@@ -1,34 +1,33 @@
+import { COLORS } from "@/styles/colors";
 import styled from "styled-components";
 
 interface VacabookProps {
-  title: string;
-  id: string;
-  onClickVocabook: () => void;
+	title: string;
+	id: string;
+	onClickVocabook: () => void;
 }
 
 const Vocabook = ({ title, id, onClickVocabook }: VacabookProps) => {
-  return (
-    <>
-      <Container onClick={onClickVocabook} id={id}>
-        <BookTitle>{title}</BookTitle>
-      </Container>
-    </>
-  );
+	return (
+		<>
+			<Container onClick={onClickVocabook} id={id}>
+				<BookTitle>{title}</BookTitle>
+			</Container>
+		</>
+	);
 };
 
 const Container = styled.div`
-  background-color: #e1f6ff;
-  width: 400px;
-  height: 64px;
-  margin-bottom: 36px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+	display: flex;
+	background-color: ${COLORS.white};
+
+	flex: 1 1 40%;
+
+	border-radius: 0.8rem;
 `;
 
 const BookTitle = styled.div`
-  color: #000000;
-  padding-left: 30px;
+	color: ${COLORS.black};
+	padding: 1.5rem;
 `;
 export default Vocabook;

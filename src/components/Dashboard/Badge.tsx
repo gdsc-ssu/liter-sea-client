@@ -1,33 +1,30 @@
+import { COLORS } from "@/styles/colors";
 import styled from "styled-components";
 import React, { FunctionComponent } from "react";
+import FlexContainer from "../common/flex-container";
 
 interface BadgeProps {
-  icon: FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
-  name: string;
+	icon: FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
+	name: string;
 }
 const Badge = ({ icon: Icon, name }: BadgeProps) => {
-  return (
-    <BadgeContainer>
-      <Icon />
-      <BadgeName>{name}</BadgeName>
-    </BadgeContainer>
-  );
+	return (
+		<BadgeContainer
+			direction="column"
+			alignSelf="stretch"
+			fullWidth
+			padding={1.5}
+		>
+			<Icon />
+			<span>{name}</span>
+		</BadgeContainer>
+	);
 };
 
 export default Badge;
 
-const BadgeContainer = styled.div`
-  color: black;
-  width: 140px;
-  height: 100px;
-  border: solid #a6ddfc;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+const BadgeContainer = styled(FlexContainer)`
+	color: ${COLORS.black};
+	border: solid ${COLORS.lightGray};
+	border-radius: 0.8rem;
 `;
-
-const BadgeName = styled.div``;

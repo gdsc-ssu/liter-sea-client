@@ -4,39 +4,33 @@ import StateStage from "@/components/StateStage/StateStage";
 import Problem from "@/components/Problem/Problem";
 import InputComponent from "@/components/AnswerInput/InputComponent";
 import NextButton from "@/components/Button/NextButton";
+import FlexContainer from "@/components/common/flex-container";
 
 const TodaySummary = () => {
-  return (
-    <Container>
-      <TextBox>
-        <Text />
-      </TextBox>
-      <ProblemBox>
-        <StateStage number={1} />
-        <Problem title={"다음 지문을 요약해주세요"}>
-          <InputComponent placeholder="내 요약" />
-        </Problem>
-        <NextButton text="제출하기" />
-      </ProblemBox>
-    </Container>
-  );
+	return (
+		<FlexContainer direction="column" gap={2}>
+			<StateStage number={1} />
+			<FlexContainer gap={2} wrap="wrap">
+				<FlexItem gap={2}>
+					<Text />
+				</FlexItem>
+				<FlexItem fullWidth>
+					<Problem title={"다음 지문을 요약해주세요"}>
+						<InputComponent placeholder="내 요약" />
+					</Problem>
+					<NextButton text="제출하기" />
+				</FlexItem>
+			</FlexContainer>
+		</FlexContainer>
+	);
 };
 
-const Container = styled.div`
-  padding: 3rem;
-  display: flex;
-  justify-content: center;
-  margin: auto;
-`;
-
-const TextBox = styled.div`
-  margin-right: 100px;
-  margin-top: 4rem;
-`;
-
-const ProblemBox = styled.div`
-  display: flex;
-  flex-direction: column;
+const FlexItem = styled(FlexContainer).attrs({
+	direction: "column",
+	alignItems: "stretch",
+	alignSelf: "stretch",
+})`
+	flex: 1 1 40%;
 `;
 
 export default TodaySummary;

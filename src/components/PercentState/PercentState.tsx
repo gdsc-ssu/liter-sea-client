@@ -1,53 +1,58 @@
 import styled from "styled-components";
 import { COLORS } from "@/styles/colors";
+import FlexContainer from "../common/flex-container";
 
 interface PSProps {
-  number: number;
-  title: string;
-  percent: number;
+	number: number;
+	title: string;
+	percent: number;
 }
 
 const PercentState = ({ number, title, percent }: PSProps) => {
-  return (
-    <PointComponent>
-      <NumberBox>{number}</NumberBox>
-      <InfoBox>
-        <InfoTitle>{title}</InfoTitle>
-        <PercentBox>
-          <PercentBar>{percent}</PercentBar>
-        </PercentBox>
-      </InfoBox>
-    </PointComponent>
-  );
+	return (
+		<FlexContainer
+			style={{
+				background: `${COLORS.white}`,
+				border: `1px solid ${COLORS.lightGray}`,
+			}}
+			alignItems="center"
+			padding={1.5}
+		>
+			<NumberBox>{number}</NumberBox>
+			<FlexContainer direction="column" alignItems="stretch" fullWidth>
+				<FlexContainer justifyContent="space-between">
+					<div style={{ fontWeight: 600 }}>{title}</div>
+					<span> {percent}</span>
+				</FlexContainer>
+				<PercentBox>
+					<PercentBar></PercentBar>
+				</PercentBox>
+			</FlexContainer>
+		</FlexContainer>
+	);
 };
 
-const PointComponent = styled.div`
-  display: flex;
-  margin: 1rem;
+const NumberBox = styled(FlexContainer)`
+	justify-content: center;
+	align-self: center;
+
+	width: 3rem;
+	height: 2.6rem;
+	border-radius: 100%;
+	font-size: 1.4rem;
+	font-weight: 600;
+
+	background-color: ${COLORS.lightGray};
+	color: ${COLORS.middleGray};
 `;
 
-const NumberBox = styled.div`
-  background-color: ${COLORS.primary};
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const PercentBox = styled.div``;
 
-const InfoBox = styled.div`
-  margin-left: 1rem;
-`;
-
-const InfoTitle = styled.div``;
-
-const PercentBox = styled.div`
-  margin-top: 0.5rem;
-`;
 const PercentBar = styled.div`
-  background-color: ${COLORS.ligthGray};
-  width: 15rem;
-  height: 1rem;
+	background-color: ${COLORS.lightGray};
+
+	height: 0.8rem;
+	border-radius: 0.8rem;
 `;
 
 export default PercentState;

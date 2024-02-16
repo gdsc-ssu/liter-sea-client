@@ -2,22 +2,16 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   * {
-    font-family:
-      'Pretendard',
-      system-ui,
-      'Helvetica Neue',
-      'Segoe UI',
-      'Apple SD Gothic Neo',
-      'Noto Sans KR',
-      'Malgun Gothic',
-      sans-serif;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     box-sizing: border-box;
     outline: none;
+    .font-smoothing-antialiased{
+      -webkit-font-smoothing: antialiased;
+    }
   }
   svg {
     display: inline-block;
   }
-  html,
   body,
   div,
   span,
@@ -125,7 +119,6 @@ const GlobalStyle = createGlobalStyle`
   }
   html {
     width: 100%;
-    height: 100vh;
   }
   body {
     width: 100%;
@@ -178,9 +171,22 @@ const GlobalStyle = createGlobalStyle`
   #root {
     width: 100%;
     height: 100%;
+    min-height: 100vh;
   }
   i {
     font-style: normal;
+  }
+
+  @media only screen and (max-width: 799px) {
+    button { font-size: 1.4rem; }
+    div { font-size: 1.4rem; }
+    span {font-size: 0.8rem;}
+  }
+
+  @media only screen and (min-width: 800px) {
+    button { font-size: 1.6rem; }
+    div { font-size: 1.6rem; }
+    span {font-size: 1.2rem;}
   }
 `;
 
