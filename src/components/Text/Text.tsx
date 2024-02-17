@@ -18,7 +18,7 @@ const Text = () => {
       style={{ minWidth: "20rem" }}
     >
       <div style={{ fontWeight: 600 }}>{title}</div>
-      <div style={{ marginBottom: "1.6rem" }}>
+      <TextBox>
         {dataArr.map((el, idx) => {
           return (
             <>
@@ -34,7 +34,7 @@ const Text = () => {
             </>
           );
         })}
-      </div>
+      </TextBox>
       {clickedIdx > -1 && <VocaModal word={dataArr[clickedIdx]} />}
     </FlexContainer>
   );
@@ -47,6 +47,10 @@ const Word = styled.span<{ clicked: boolean }>`
   font-size: 1.4rem;
 `;
 
+const TextBox = styled.div`
+  margin-bottom: 1.6rem;
+  height: 72vh;
+  overflow-y: auto;
 `;
 
 export default Text;
