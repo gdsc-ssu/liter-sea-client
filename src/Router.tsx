@@ -13,40 +13,45 @@ import Vocabook from "./pages/Vocabulary/Vocabulary";
 import VocabookContents from "./pages/Vocabulary/VocabularyContents";
 import VocabookStudy from "./pages/Vocabulary/VocabularyStudy";
 import Main from "./pages/Main/Main";
+import SignIn from "./pages/SignIn/SignIn";
+import ProtectedRoute from "./Routes/ProtectedRoute";
 
 function Router() {
-	return (
-		<BrowserRouter>
-			<Header />
-			<Layout>
-				<Routes>
-					<Route path="/" element={<Main />} />
-					<Route path="/signin" element={<div>signin</div>} />
-					<Route path="/signout" element={<div>signout</div>} />
+  return (
+    <BrowserRouter>
+      <Header />
+      <Layout>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signout" element={<div>signout</div>} />
 
-					{/** 단계별 확인 */}
-					<Route path="/stage/1" element={<Multiple />} />
-					<Route path="/stage/2" element={<Vocabulary />} />
-					<Route path="/stage/result" element={<StageResult />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Main />} />
 
-					{/** 오늘의 요약 */}
-					<Route path="/summary/1" element={<TodaySummary />} />
-					<Route path="/summary/result" element={<SummaryResult />} />
+            {/** 단계별 확인 */}
+            <Route path="/stage/1" element={<Multiple />} />
+            <Route path="/stage/2" element={<Vocabulary />} />
+            <Route path="/stage/result" element={<StageResult />} />
 
-					{/* 복습 노트 */}
-					<Route path="/review" element={<ReviewNote />} />
-					<Route path="/review/1" element={<Summary />} />
+            {/** 오늘의 요약 */}
+            <Route path="/summary/1" element={<TodaySummary />} />
+            <Route path="/summary/result" element={<SummaryResult />} />
 
-					{/* 단어장 */}
-					<Route path="/vocabulary" element={<Vocabook />} />
-					<Route path="/vocabulary/id" element={<VocabookContents />} />
-					<Route path="/vocabulary/id/study" element={<VocabookStudy />} />
+            {/* 복습 노트 */}
+            <Route path="/review" element={<ReviewNote />} />
+            <Route path="/review/1" element={<Summary />} />
 
-					<Route path="/loading" element={<ResultLoading />} />
-				</Routes>
-			</Layout>
-		</BrowserRouter>
-	);
+            {/* 단어장 */}
+            <Route path="/vocabulary" element={<Vocabook />} />
+            <Route path="/vocabulary/id" element={<VocabookContents />} />
+            <Route path="/vocabulary/id/study" element={<VocabookStudy />} />
+
+            <Route path="/loading" element={<ResultLoading />} />
+          </Route>
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
 }
 
 export default Router;

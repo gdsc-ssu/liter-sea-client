@@ -38,7 +38,7 @@ export const wordApi = {
     axiosInstance.get("api/v1/word", {
       params: { query: wordId },
     }),
-  saveWord: () => axiosInstance.post("api/v1/word"), //원리 물어보기
+  saveWord: () => axiosInstance.post("api/v1/word"),
   loadWordList: () => axiosInstance.get("api/v1/word/wordList"),
 };
 
