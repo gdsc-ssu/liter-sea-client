@@ -15,6 +15,7 @@ import VocabookStudy from "./pages/Vocabulary/VocabularyStudy";
 import Main from "./pages/Main/Main";
 import SignIn from "./pages/SignIn/SignIn";
 import ProtectedRoute from "./Routes/ProtectedRoute";
+import NotFound from "./pages/404/NotFound";
 
 function Router() {
   return (
@@ -47,6 +48,7 @@ function Router() {
             <Route path="/vocabulary/id/study" element={<VocabookStudy />} />
 
             <Route path="/loading" element={<ResultLoading />} />
+            <Route path="/*" element={<NotFound />} />
           </Route>
         </Routes>
       </Layout>
