@@ -34,7 +34,11 @@ export const homeApi = {
 };
 
 export const wordApi = {
-  saveWord: () => axiosInstance.post("api/v1/word"),
+  saveWord: () =>
+    // 수정 필요
+    axiosInstance.post("api/v1/word", {
+      data: {},
+    }),
   loadWordbyWordId: (wordId: number) =>
     axiosInstance.get("api/v1/word", {
       params: { query: wordId },
@@ -43,7 +47,11 @@ export const wordApi = {
 };
 
 export const todayApi = {
-  getResult: () => axiosInstance.post("api/v1/today/post", {}),
+  getResult: () =>
+    // 수정 필요
+    axiosInstance.post("api/v1/today/post", {
+      data: {},
+    }),
   loadPassages: () => axiosInstance.get("api/v1/today"),
 };
 
