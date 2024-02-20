@@ -6,73 +6,76 @@ import { useState } from "react";
 import ProfileModal from "@/components/Modals/ProfileModal";
 import ModalPortal from "@/components/Modals/ModalPortal";
 import FlexContainer from "../common/flex-container";
+import Logo from "@/assets/SVGs/logo.svg?react";
 
 const Header = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const handleGoToMain = () => {
-		navigate("/");
-	};
+  const handleGoToMain = () => {
+    navigate("/");
+  };
 
-	const handleGoToReview = () => {
-		navigate("/review");
-	};
+  const handleGoToReview = () => {
+    navigate("/review");
+  };
 
-	const handleGoToVocabulary = () => {
-		navigate("/vocabulary");
-	};
+  const handleGoToVocabulary = () => {
+    navigate("/vocabulary");
+  };
 
-	const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-	function handleModal() {
-		const currentIsOpen = isOpen;
-		setIsOpen(!currentIsOpen);
-	}
+  function handleModal() {
+    const currentIsOpen = isOpen;
+    setIsOpen(!currentIsOpen);
+  }
 
-	return (
-		<FlexContainer
-			justifyContent="center"
-			withBorder={false}
-			style={{
-				backgroundColor: `${COLORS.white}`,
-				borderBottom: `1px solid ${COLORS.lightGray}`,
-				position: "sticky",
-				zIndex: 100,
-				top: 0,
-			}}
-		>
-			<FlexContainer
-				wrap="wrap"
-				style={{
-					width: "100%",
-					maxWidth: "1280px",
-				}}
-				alignItems="center"
-				justifyContent="space-between"
-			>
-				<FlexContainer>
-					<styled.LogoBox onClick={handleGoToMain}>logo</styled.LogoBox>
-					<styled.MenuComponentBox onClick={handleGoToReview}>
-						복습 노트
-					</styled.MenuComponentBox>
-					<styled.MenuComponentBox onClick={handleGoToVocabulary}>
-						단어장
-					</styled.MenuComponentBox>
-				</FlexContainer>
-				<FlexContainer wrap="wrap">
-					닉네임
-					{isOpen && (
-						<ModalPortal>
-							<ProfileModal onClose={handleModal} />
-						</ModalPortal>
-					)}
-					<styled.ProfileImgBox onClick={handleModal}>
-						<ProfileHat width={"60%"} />
-					</styled.ProfileImgBox>
-				</FlexContainer>
-			</FlexContainer>
-		</FlexContainer>
-	);
+  return (
+    <FlexContainer
+      justifyContent="center"
+      withBorder={false}
+      style={{
+        backgroundColor: `${COLORS.white}`,
+        borderBottom: `1px solid ${COLORS.lightGray}`,
+        position: "sticky",
+        zIndex: 100,
+        top: 0,
+      }}
+    >
+      <FlexContainer
+        wrap="wrap"
+        style={{
+          width: "100%",
+          maxWidth: "1280px",
+        }}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <FlexContainer>
+          <styled.LogoBox onClick={handleGoToMain}>
+            <Logo />
+          </styled.LogoBox>
+          <styled.MenuComponentBox onClick={handleGoToReview}>
+            복습 노트
+          </styled.MenuComponentBox>
+          <styled.MenuComponentBox onClick={handleGoToVocabulary}>
+            단어장
+          </styled.MenuComponentBox>
+        </FlexContainer>
+        <FlexContainer wrap="wrap">
+          닉네임
+          {isOpen && (
+            <ModalPortal>
+              <ProfileModal onClose={handleModal} />
+            </ModalPortal>
+          )}
+          <styled.ProfileImgBox onClick={handleModal}>
+            <ProfileHat width={"60%"} />
+          </styled.ProfileImgBox>
+        </FlexContainer>
+      </FlexContainer>
+    </FlexContainer>
+  );
 };
 
 export default Header;
