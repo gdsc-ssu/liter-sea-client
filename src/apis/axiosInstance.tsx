@@ -2,7 +2,7 @@ import Axios from "axios";
 
 const axiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  timeout: 2000,
+  timeout: 5000,
 });
 
 axiosInstance.interceptors.request.use(
@@ -34,23 +34,32 @@ export const homeApi = {
 };
 
 export const wordApi = {
-  loadWord: (wordId: number) =>
+  saveWord: () => axiosInstance.post("api/v1/word"),
+  loadWordbyWordId: (wordId: number) =>
     axiosInstance.get("api/v1/word", {
       params: { query: wordId },
     }),
-  saveWord: () => axiosInstance.post("api/v1/word"),
   loadWordList: () => axiosInstance.get("api/v1/word/wordList"),
 };
 
 export const todayApi = {
-  getResult: () => axiosInstance.post("today/post", {}),
-  loadPassages: () => axiosInstance.get("today/"),
+  getResult: () => axiosInstance.post("api/v1/today/post", {}),
+  loadPassages: () => axiosInstance.get("api/v1/today"),
 };
 
 export const userApi = {
-  signIn: () => axiosInstance.get("v1/api/user/login"), //"v1/api/user/google-login"
+  signIn: () => axiosInstance.get("api/v1/user/login"), //"api/v1/user/google-login"
 };
 
 export const reviewApi = {
-  loadReview: () => axiosInstance.get("review/test"),
+  loadReviewBySolvedId: (solve_id: number) =>
+    axiosInstance.get("api/v1/review", {
+      params: { query: solve_id },
+    }),
+  loadReviewByCreateAt: (createAt: string) =>
+    axiosInstance.get("api/v1/review", {
+      params: { query: createAt },
+    }),
+  loadReview: () => axiosInstance.get("api/v1/review/test"),
+  loadReviewDayList: () => axiosInstance.get("api/v1/review/test/dayList"),
 };
