@@ -10,13 +10,9 @@ import styled from "styled-components";
 import { UserInfoAtom } from "@/recoil/UserInfoAtom";
 
 const USER_INFO = {
-  nickname: "sna0e",
-  level: 8,
-  exp: 89,
   todayComplete: 4,
   badgeName: "겁 없는 탐험가",
   boatName: "초심자의 배",
-  location: 7,
 };
 
 const Main = () => {
@@ -26,10 +22,11 @@ const Main = () => {
   const [boatInfo, setBoatInfo] = useState("");
 
   useEffect(() => {
-    homeApi
-      .loadMain()
+    const main = homeApi.loadMain();
+
+    main
       .then((res) => {
-        if (res.data.code === 200) {
+        if (res.status === 200) {
           setUserInfo(res.data);
           console.log(userInfo);
         }
@@ -41,9 +38,8 @@ const Main = () => {
     homeApi
       .loadBadgeInfo()
       .then((res) => {
-        if (res.data.code === 200) {
+        if (res.status === 200) {
           setBadgeInfo(res.data);
-          console.log(badgeInfo);
         }
       })
       .catch((error) => {
@@ -53,9 +49,8 @@ const Main = () => {
     homeApi
       .loadBoatInfo()
       .then((res) => {
-        if (res.data.code === 200) {
+        if (res.status === 2000) {
           setBoatInfo(res.data);
-          console.log(boatInfo);
         }
       })
       .catch((error) => {
@@ -70,13 +65,13 @@ const Main = () => {
   return (
     <FlexContainer wrap="wrap" gap={2}>
       <FlexItem direction="column">
-        <Map currentLocation={USER_INFO.location} />
+        <Map currentLocation={userInfo?.location + 1} />
         <BlueButton text="항해 시작" onClickFunc={handleGoToTodaySummary} />
       </FlexItem>
       <FlexItem fullWidth>
         <Dashboard
-          level={USER_INFO.level}
-          exp={USER_INFO.exp}
+          level={userInfo?.level}
+          exp={userInfo?.exp}
           todayComplete={USER_INFO.todayComplete}
           badgeName={USER_INFO.badgeName}
           boatName={USER_INFO.boatName}
