@@ -39,11 +39,7 @@ export const homeApi = {
 };
 
 export const wordApi = {
-  saveWord: () =>
-    // 수정 필요
-    axiosInstance.post("api/v1/word", {
-      data: {},
-    }),
+  saveWord: (word: string) => axiosInstance.post(`api/v1/word/${word}`),
   loadWordbyWordId: (wordId: number) =>
     axiosInstance.get("api/v1/word", {
       params: { query: wordId },
