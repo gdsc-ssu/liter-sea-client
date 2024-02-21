@@ -1,52 +1,60 @@
 import styled from "styled-components";
 import FlexContainer from "../common/flex-container";
+import { useNavigate } from "react-router-dom";
 
 interface RLProps {
-	number: number;
-	title: string;
-	score: number;
+  number: number;
+  title: string;
+  score: number;
 }
 
 const ReviewList = ({ number, title, score }: RLProps) => {
-	return (
-		<FlexContainer
-			justifyContent="space-between"
-			style={{ padding: "1.5rem 2rem" }}
-		>
-			<NumberBox>{number}</NumberBox>
-			<TitleBox>{title}</TitleBox>
-			<ScoreBox>{score}</ScoreBox>
-			<ArrowBox>{">"}</ArrowBox>
-		</FlexContainer>
-	);
+  const navigate = useNavigate();
+  return (
+    <FlexContainer
+      justifyContent="space-between"
+      style={{ padding: "1.5rem 2rem" }}
+    >
+      <NumberBox>{number}</NumberBox>
+      <TitleBox>{title}</TitleBox>
+      <ScoreBox>{score}</ScoreBox>
+      <ArrowBox
+        onClick={() => {
+          navigate(`/review/${number}`);
+        }}
+      >
+        {">"}
+      </ArrowBox>
+    </FlexContainer>
+  );
 };
 
 export const NumberBox = styled.div`
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 
-	font-size: 1.4rem;
+  font-size: 1.4rem;
 `;
 
 export const TitleBox = styled.div`
-	display: flex;
+  display: flex;
 
-	margin-left: 5rem;
-	font-size: 1.4rem;
+  margin-left: 5rem;
+  font-size: 1.4rem;
 `;
 
 export const ScoreBox = styled.div`
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 
-	font-size: 1.4rem;
+  font-size: 1.4rem;
 `;
 
 export const ArrowBox = styled.div`
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 
-	font-size: 1.4rem;
+  font-size: 1.4rem;
 `;
 
 export default ReviewList;
