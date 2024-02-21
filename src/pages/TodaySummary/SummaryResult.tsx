@@ -13,7 +13,6 @@ const SummaryResult = () => {
   const [summaryResult, setSummaryResult] = useRecoilState(
     summaryResultListAtom
   );
-  const [score, setScore] = useState<number>(0);
   const number = [1, 2, 3, 4, 5];
   const ScoreTitle = [
     "한글 맞춤법 및 띄어쓰기",
@@ -79,6 +78,8 @@ const SummaryResult = () => {
           <FlexContainer
             style={{
               padding: "0.5rem 1rem",
+              borderTop: "2px solid #d4dbde",
+              borderRadius: "0",
             }}
           >
             {summaryResult[presentIdx].answer}
