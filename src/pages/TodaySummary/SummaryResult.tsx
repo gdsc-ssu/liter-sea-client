@@ -3,10 +3,31 @@ import PercentState from "@/components/PercentState/PercentState";
 import BlueButton from "@/components/Button/BlueButton";
 import FlexContainer from "@/components/common/flex-container";
 import { COLORS } from "@/styles/colors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { summaryResultListAtom } from "@/recoil/SummaryAtom";
+import { AvailableScore } from "@/utils/function";
 
 const SummaryResult = () => {
   const [presentIdx, setPresentIdx] = useState<number>(1);
+  const [summaryResult, setSummaryResult] = useRecoilState(
+    summaryResultListAtom
+  );
+  const [score, setScore] = useState<number>(0);
+  const number = [1, 2, 3, 4, 5];
+  const ScoreTitle = [
+    "한글 맞춤법 및 띄어쓰기",
+    "단어 선택",
+    "올바른 문장",
+    "완전한 문장",
+    "키워드 또는 중요 내용 포함",
+    "유사한 내용 미반복",
+  ];
+
+  useEffect(() => {
+    console.log("qwerqwer", summaryResult);
+  }, []);
+
   const handleOnClick = () => {};
   return (
     <FlexContainer direction="column" alignItems="stretch">
@@ -15,28 +36,52 @@ const SummaryResult = () => {
         <FlexItem
           style={{ minWidth: "20rem", background: ` ${COLORS.lightGray}` }}
         >
-          <div onClick={() => setPresentIdx(1)}>
-            <PercentState number={1} title="1번 지문" percent={50} />
-          </div>
-          <div onClick={() => setPresentIdx(2)}>
-            <PercentState number={2} title="2번 지문" percent={50} />
-          </div>
-          <div onClick={() => setPresentIdx(3)}>
-            <PercentState number={3} title="3번 지문" percent={50} />
-          </div>
-          <div onClick={() => setPresentIdx(4)}>
-            <PercentState number={4} title="4번 지문" percent={50} />
-          </div>
-          <div onClick={() => setPresentIdx(5)}>
-            <PercentState number={5} title="5번 지문" percent={50} />
-          </div>
+          {number.map((el, idx) => {
+            const presentScore = AvailableScore(
+              summaryResult[idx]?.score1,
+              summaryResult[idx]?.score2,
+              summaryResult[idx]?.score3,
+              summaryResult[idx]?.score4,
+              summaryResult[idx]?.score5,
+              summaryResult[idx]?.score6
+            );
+            return (
+              <div key={el} onClick={() => setPresentIdx(el)}>
+                <PercentState
+                  number={el}
+                  title={el + "번 지문"}
+                  percent={presentScore}
+                />
+              </div>
+            );
+          })}
         </FlexItem>
         <FlexItem style={{ background: `${COLORS.boxBg}` }}>
-          <PercentState number={4} title="1번 지문" percent={50} />
-          <FlexContainer style={{ padding: "0.5rem 1rem" }}>
-            귀하의 답변은 문단의 주제와 주요 내용을 정확하게 파악하고 있습니다.
-            또한, 문단의 세부 내용인 "3년 동안의 지속"과 "한국의 승리"를
-            언급하고 있습니다.
+          <PercentState number={presentIdx} title={presentIdx + "번 지문"} />
+          <ScoreBox>
+            • {ScoreTitle[0]}: {summaryResult[presentIdx].score1}
+          </ScoreBox>
+          <ScoreBox>
+            • {ScoreTitle[1]}: {summaryResult[presentIdx].score2}
+          </ScoreBox>
+          <ScoreBox>
+            • {ScoreTitle[2]}: {summaryResult[presentIdx].score3}
+          </ScoreBox>
+          <ScoreBox>
+            • {ScoreTitle[3]}: {summaryResult[presentIdx].score4}
+          </ScoreBox>
+          <ScoreBox>
+            • {ScoreTitle[4]}: {summaryResult[presentIdx].score5}
+          </ScoreBox>
+          <ScoreBox>
+            • {ScoreTitle[5]}: {summaryResult[presentIdx].score6}
+          </ScoreBox>
+          <FlexContainer
+            style={{
+              padding: "0.5rem 1rem",
+            }}
+          >
+            {summaryResult[presentIdx].answer}
           </FlexContainer>
         </FlexItem>
       </FlexContainer>
@@ -53,5 +98,7 @@ const FlexItem = styled(FlexContainer).attrs({
   flex: 1 1 40%;
   padding: 1rem;
 `;
+
+const ScoreBox = styled.div``;
 
 export default SummaryResult;

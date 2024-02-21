@@ -36,9 +36,10 @@ const TodaySummary = ({ stage }: StageProps) => {
       if (recoilSummary[0].articleId == 0) {
         setSummaryResult(res.data.result.summaryResultList);
       } else {
+        console.log("artilce", articleID);
         setSummaryResult((prev) => [
           ...prev,
-          res.data.result.summaryResultList,
+          ...res.data.result.summaryResultList,
         ]);
       }
     });
@@ -63,7 +64,7 @@ const TodaySummary = ({ stage }: StageProps) => {
             text={isLast ? "제출하기" : "다음 단계"}
             onClick={() => {
               if (stage < 5) {
-                console.log("input,", input);
+                PostSummaryList(articleId);
                 navigate(`/summary/${stage + 1}`);
                 if (recoilSummary[0].articleId == 0) {
                   setRecoilSummary([{ articleId: articleId, summary: input }]);
@@ -74,9 +75,9 @@ const TodaySummary = ({ stage }: StageProps) => {
                   ]);
                 }
               } else {
+                PostSummaryList(articleId);
                 navigate(`/summary/result`);
               }
-              PostSummaryList(articleId);
               console.log(summaryResult);
               setInput("");
               setArticleID(0);
