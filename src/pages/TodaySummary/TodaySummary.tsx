@@ -6,7 +6,7 @@ import InputComponent from "@/components/AnswerInput/InputComponent";
 import NextButton from "@/components/Button/NextButton";
 import FlexContainer from "@/components/common/flex-container";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { SummaryAtom, summaryResultListAtom } from "@/recoil/SummaryAtom";
 import { todayApi } from "@/apis/axiosInstance";
@@ -27,8 +27,20 @@ const TodaySummary = ({ stage }: StageProps) => {
     summaryResultListAtom
   );
   const [articleId, setArticleID] = useState<number>(0);
+  const [splitData, setSplitData] = useState<string[]>([]);
+
   const isLast = stage > 4 ? true : false;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const TodayRes = todayApi.loadPassages();
+    TodayRes.then((res) => {
+      setSplitData(
+        res.data.result.todayArticleList[stage - 1].article.split(" ")
+      );
+      setArticleID(res.data.result.todayArticleList[stage - 1].articleId);
+    });
+  }, [stage]);
 
   const PostSummaryList = (articleID: number) => {
     const GetRes = todayApi.getResult({ articleId: articleID, summary: input });
@@ -50,7 +62,7 @@ const TodaySummary = ({ stage }: StageProps) => {
       <StateStage number={stage} />
       <FlexContainer gap={2} wrap="wrap">
         <FlexItem gap={2}>
-          <Text stage={stage} setArticleID={setArticleID} />
+          <Text splitData={splitData} />
         </FlexItem>
         <FlexItem fullWidth>
           <Problem title={"다음 지문을 요약해주세요"}>
@@ -65,7 +77,6 @@ const TodaySummary = ({ stage }: StageProps) => {
             onClick={() => {
               if (stage < 5) {
                 PostSummaryList(articleId);
-                navigate(`/summary/${stage + 1}`);
                 if (recoilSummary[0].articleId == 0) {
                   setRecoilSummary([{ articleId: articleId, summary: input }]);
                 } else {
@@ -74,11 +85,17 @@ const TodaySummary = ({ stage }: StageProps) => {
                     { articleId: stage, summary: input },
                   ]);
                 }
+                navigate(`/summary/${stage + 1}`);
               } else {
+                setRecoilSummary((prev) => [
+                  ...prev,
+                  { articleId: stage, summary: input },
+                ]);
                 PostSummaryList(articleId);
                 navigate(`/summary/result`);
               }
-              console.log(summaryResult);
+              console.log("recoilsave", recoilSummary);
+              console.log("summary", summaryResult);
               setInput("");
               setArticleID(0);
             }}
