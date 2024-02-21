@@ -25,7 +25,11 @@ const PercentState = ({ number, title, percent }: PSProps) => {
           <span> {percent}</span>
         </FlexContainer>
         <PercentBox>
-          <PercentBar></PercentBar>
+          {percent && (
+            <PercentBar>
+              <PercentBlueBar style={{ width: `${percent / 4.37}rem` }} />
+            </PercentBar>
+          )}
         </PercentBox>
       </FlexContainer>
     </FlexContainer>
@@ -51,6 +55,12 @@ const PercentBox = styled.div``;
 const PercentBar = styled.div`
   background-color: ${COLORS.lightGray};
 
+  height: 0.8rem;
+  border-radius: 0.8rem;
+`;
+
+const PercentBlueBar = styled.div`
+  background-color: ${COLORS.primary};
   height: 0.8rem;
   border-radius: 0.8rem;
 `;
