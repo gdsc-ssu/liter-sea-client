@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import * as styledButton from "@/components/Button/Button.style";
 import { COLORS } from "@/styles/colors";
 import { userApi } from "@/apis/axiosInstance";
 import { useLocation, useNavigate } from "react-router-dom";

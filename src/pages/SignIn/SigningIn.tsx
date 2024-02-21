@@ -15,13 +15,18 @@ const SigningIn = () => {
 
   useEffect(() => {
     const googleSignIn = userApi.GoogleSignIn(code);
-    googleSignIn.then((res) => {
-      if (res.status === 200) {
-        localStorage.setItem("accessToken", res.data.result.accessToken);
-        setAccessToken(res.data.result.accessToken);
-        navigate(from);
-      }
-    });
+    googleSignIn
+      .then((res) => {
+        if (res.status === 200) {
+          localStorage.setItem("accessToken", res.data.result.accessToken);
+          setAccessToken(res.data.result.accessToken);
+          navigate(from);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("in useEffect");
+      });
   }, []);
 
   return <SigningInWrapper>Signing In ...</SigningInWrapper>;
@@ -29,4 +34,7 @@ const SigningIn = () => {
 
 export default SigningIn;
 
-const SigningInWrapper = styled.div``;
+const SigningInWrapper = styled.div`
+  text-align: center;
+  margin-top: 25%;
+`;
