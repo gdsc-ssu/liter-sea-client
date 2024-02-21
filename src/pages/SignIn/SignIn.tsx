@@ -22,6 +22,7 @@ const SignIn = () => {
       .signIn()
       .then((res) => {
         if (res.data.code === 200) {
+          localStorage.setItem("accessToken", res.data.result.accessToken);
           setAccessToken(res.data.result.accessToken);
           navigate(from);
         }
