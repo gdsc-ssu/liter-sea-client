@@ -1,27 +1,15 @@
 import { COLORS } from "@/styles/colors";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import VocaModal from "../VocaModal/VocaModal";
 import FlexContainer from "../common/flex-container";
-import { todayApi } from "@/apis/axiosInstance";
 
 interface TProps {
-  stage: number;
-  setArticleID: (number: number) => void;
+  splitData: string[];
 }
 
-const Text = ({ stage, setArticleID }: TProps) => {
+const Text = ({ splitData }: TProps) => {
   const [clickedIdx, setIsClickedIdx] = useState(-1);
-  const [splitData, setSplitData] = useState<string[]>([]);
-  useEffect(() => {
-    const TodayRes = todayApi.loadPassages();
-    TodayRes.then((res) => {
-      setSplitData(
-        res.data.result.todayArticleList[stage - 1].article.split(" ")
-      );
-      setArticleID(res.data.result.todayArticleList[stage - 1].articleId);
-    });
-  }, [stage]);
 
   return (
     <FlexContainer

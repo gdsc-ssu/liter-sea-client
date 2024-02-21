@@ -25,10 +25,6 @@ const SummaryResult = () => {
     "유사한 내용 미반복",
   ];
 
-  useEffect(() => {
-    console.log("qwerqwer", summaryResult);
-  }, []);
-
   const handleOnClick = () => {
     navigate("/review");
   };
