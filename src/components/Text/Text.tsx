@@ -4,16 +4,19 @@ import styled from "styled-components";
 import VocaModal from "../VocaModal/VocaModal";
 import FlexContainer from "../common/flex-container";
 import { todayApi } from "@/apis/axiosInstance";
+import { StageProps } from "@/pages/TodaySummary/TodaySummary";
 
-const Text = () => {
+const Text = ({ stage }: StageProps) => {
   const [clickedIdx, setIsClickedIdx] = useState(-1);
   const [splitData, setSplitData] = useState<string[]>([]);
   useEffect(() => {
     const TodayRes = todayApi.loadPassages();
     TodayRes.then((res) => {
-      setSplitData(res.data.result.todayArticleList[0].article.split(" "));
+      setSplitData(
+        res.data.result.todayArticleList[stage - 1].article.split(" ")
+      );
     });
-  }, []);
+  }, [stage]);
   const title = "어디서 구할 수 있나요?";
 
   return (
