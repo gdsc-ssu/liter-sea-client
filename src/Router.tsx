@@ -44,7 +44,7 @@ function Router() {
 
             {/* 복습 노트 */}
             <Route path="/review" element={<ReviewNote />} />
-            <Route path="/review/1" element={<Summary />} />
+            <Route path="/review/:id" element={<Summary />} />
 
             {/* 단어장 */}
             <Route path="/vocabulary" element={<Vocabook />} />
