@@ -35,6 +35,10 @@ const SignIn = () => {
       });
   }
 
+  async function handleGoogleSignInButton() {
+    window.location.href = import.meta.env.VITE_GOOGLE_OAUTH_URL;
+  }
+
   return (
     <SignInContainer>
       <SignInForm>
@@ -52,17 +56,15 @@ const SignIn = () => {
         ></InputPW>
         <BlueButton text={"로그인"} onClickFunc={handleSingInButton} />
       </SignInForm>
-      <MoveToOAuth href={import.meta.env.VITE_GOOGLE_OAUTH_URL}>
-        <MaterialButton>
-          <MaterialButtonContentWrapper>
-            <MaterialButtonIcon>
-              <GoogleIcon />
-            </MaterialButtonIcon>
-            <MaterialButtonContents>Sign in with Google</MaterialButtonContents>
-          </MaterialButtonContentWrapper>
-          <MaterialButtonState className="gsi-material-button-state" />
-        </MaterialButton>
-      </MoveToOAuth>
+      <MaterialButton onClick={handleGoogleSignInButton}>
+        <MaterialButtonContentWrapper>
+          <MaterialButtonIcon>
+            <GoogleIcon />
+          </MaterialButtonIcon>
+          <MaterialButtonContents>Sign in with Google</MaterialButtonContents>
+        </MaterialButtonContentWrapper>
+        <MaterialButtonState className="gsi-material-button-state" />
+      </MaterialButton>
     </SignInContainer>
   );
 };
@@ -104,11 +106,6 @@ const InputPW = styled.input`
   font-size: 1.4rem;
   min-height: 1rem;
   margin-bottom: 20px;
-`;
-
-const MoveToOAuth = styled.a`
-  height: 60px;
-  width: auto;
 `;
 
 const MaterialButton = styled.button`
