@@ -33,8 +33,8 @@ axiosInstance.interceptors.response.use(
 
 export const homeApi = {
   loadMain: () => axiosInstance.get("api/v1/home/main"),
-  loadBoatInfo: () => axiosInstance.get("api/v1/home/boatinfo"),
-  loadBadgeInfo: () => axiosInstance.get("api/v1/home/badgeinfo"),
+  loadBoatInfo: () => axiosInstance.get("api/v1/home/boatInfo"),
+  loadBadgeInfo: () => axiosInstance.get("api/v1/home/badgeInfo"),
 };
 
 export const wordApi = {
