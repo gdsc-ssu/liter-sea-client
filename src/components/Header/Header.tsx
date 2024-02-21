@@ -7,6 +7,9 @@ import ProfileModal from "@/components/Modals/ProfileModal";
 import ModalPortal from "@/components/Modals/ModalPortal";
 import FlexContainer from "../common/flex-container";
 import Logo from "@/assets/SVGs/logo.svg?react";
+import { useRecoilValue } from "recoil";
+import { UserInfoAtom } from "@/recoil/UserInfoAtom";
+import { isSignInSelector } from "@/recoil/TokenAtom";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,6 +27,7 @@ const Header = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+  const userInfo = useRecoilValue(UserInfoAtom);
 
   function handleModal() {
     const currentIsOpen = isOpen;
@@ -63,7 +67,7 @@ const Header = () => {
           </styled.MenuComponentBox>
         </FlexContainer>
         <FlexContainer wrap="wrap">
-          닉네임
+          {userInfo ? userInfo.nickname : ""}
           {isOpen && (
             <ModalPortal>
               <ProfileModal onClose={handleModal} />
