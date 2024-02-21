@@ -31,7 +31,7 @@ const VocaburalyContents = () => {
   return (
     <FlexContainer direction="column" alignItems="stretch" gap={2}>
       <BackButton onClick={handleGoToBack} />
-      <PageTitle>{location.state?.title}</PageTitle>
+      <PageTitle>{location.state.title}</PageTitle>
       <FlexContainer direction="column" alignItems="stretch" gap={2}>
         {VOCABOOK_CONTENTS.map((item, index) => (
           <WordContainer>
@@ -39,7 +39,6 @@ const VocaburalyContents = () => {
               key={index}
               word={item.word}
               meaning={item.meaning}
-              example={item.example}
             ></WordContent>
             <DeleteWordButtonContainer>
               <DeleteWordButton />

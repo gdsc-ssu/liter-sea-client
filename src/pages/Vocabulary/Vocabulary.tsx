@@ -11,9 +11,9 @@ import FlexContainer from "@/components/common/flex-container";
 import { wordApi } from "@/apis/axiosInstance";
 
 const BOOK_LIST = [
-  { title: "단어장1", id: "1" },
-  { title: "단어장2", id: "2" },
-  { title: "단어장3", id: "3" },
+  { title: "시사 단어장", id: "1" },
+  { title: "과학 용어", id: "2" },
+  { title: "IT 관련 단어", id: "3" },
 ];
 
 const Vocabulary = ({}) => {
@@ -21,7 +21,6 @@ const Vocabulary = ({}) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [vocaList, setVocaList] = useState([]);
 
   function handleOpenModal() {
     setIsOpen(true);
@@ -46,19 +45,6 @@ const Vocabulary = ({}) => {
       state: BOOK_LIST[parseInt(targetEvent.id) - 1],
     });
   }
-
-  useEffect(() => {
-    const word = wordApi.loadWordList();
-    word
-      .then((res) => {
-        if (res.status === 200) {
-          setVocaList(res.data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   return (
     <FlexContainer direction="column" alignItems="stretch">
