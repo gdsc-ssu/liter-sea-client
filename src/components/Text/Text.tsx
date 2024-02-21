@@ -4,9 +4,13 @@ import styled from "styled-components";
 import VocaModal from "../VocaModal/VocaModal";
 import FlexContainer from "../common/flex-container";
 import { todayApi } from "@/apis/axiosInstance";
-import { StageProps } from "@/pages/TodaySummary/TodaySummary";
 
-const Text = ({ stage }: StageProps) => {
+interface TProps {
+  stage: number;
+  setArticleID: (number: number) => void;
+}
+
+const Text = ({ stage, setArticleID }: TProps) => {
   const [clickedIdx, setIsClickedIdx] = useState(-1);
   const [splitData, setSplitData] = useState<string[]>([]);
   useEffect(() => {
@@ -15,6 +19,7 @@ const Text = ({ stage }: StageProps) => {
       setSplitData(
         res.data.result.todayArticleList[stage - 1].article.split(" ")
       );
+      setArticleID(res.data.result.todayArticleList[stage - 1].articleId);
     });
   }, [stage]);
   const title = "어디서 구할 수 있나요?";

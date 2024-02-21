@@ -6,12 +6,18 @@ import InputComponent from "@/components/AnswerInput/InputComponent";
 import NextButton from "@/components/Button/NextButton";
 import FlexContainer from "@/components/common/flex-container";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { SummaryAtom } from "@/recoil/SummaryAtom";
 
 export interface StageProps {
   stage: number;
 }
 
 const TodaySummary = ({ stage }: StageProps) => {
+  const [input, setInput] = useState<string>("");
+  const [recoilSummary, setRecoilSummary] = useRecoilState(SummaryAtom);
+  const [articleId, setArticleID] = useState<number>(0);
   const isLast = stage > 4 ? true : false;
   const navigate = useNavigate();
 
@@ -20,20 +26,36 @@ const TodaySummary = ({ stage }: StageProps) => {
       <StateStage number={stage} />
       <FlexContainer gap={2} wrap="wrap">
         <FlexItem gap={2}>
-          <Text stage={stage} />
+          <Text stage={stage} setArticleID={setArticleID} />
         </FlexItem>
         <FlexItem fullWidth>
           <Problem title={"다음 지문을 요약해주세요"}>
-            <InputComponent placeholder="내 요약" />
+            <InputComponent
+              placeholder="내 요약"
+              input={input}
+              setInput={setInput}
+            />
           </Problem>
           <NextButton
             text={isLast ? "제출하기" : "다음 단계"}
             onClick={() => {
               if (stage < 5) {
+                console.log("input,", input);
                 navigate(`/summary/${stage + 1}`);
+                if (recoilSummary[0].articleId == 0) {
+                  setRecoilSummary([{ articleId: articleId, summary: input }]);
+                } else {
+                  setRecoilSummary((prev) => [
+                    ...prev,
+                    { articleId: stage, summary: input },
+                  ]);
+                }
+                console.log(recoilSummary);
               } else {
                 navigate(`/summary/result`);
               }
+              setInput("");
+              setArticleID(0);
             }}
           />
         </FlexItem>
