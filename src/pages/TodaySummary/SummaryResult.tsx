@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { summaryResultListAtom } from "@/recoil/SummaryAtom";
 import { AvailableScore } from "@/utils/function";
+import { useNavigate } from "react-router-dom";
 
 const SummaryResult = () => {
   const [presentIdx, setPresentIdx] = useState<number>(1);
   const [summaryResult, setSummaryResult] = useRecoilState(
     summaryResultListAtom
   );
+  const navigate = useNavigate();
   const number = [1, 2, 3, 4, 5];
   const ScoreTitle = [
     "한글 맞춤법 및 띄어쓰기",
@@ -27,7 +29,9 @@ const SummaryResult = () => {
     console.log("qwerqwer", summaryResult);
   }, []);
 
-  const handleOnClick = () => {};
+  const handleOnClick = () => {
+    navigate("/review");
+  };
   return (
     <FlexContainer direction="column" alignItems="stretch">
       <div style={{ fontWeight: 600 }}>오늘의 요약 결과</div>
