@@ -1,3 +1,4 @@
+import { PostSummary } from "@/pages/TodaySummary/TodaySummary";
 import Axios from "axios";
 
 const axiosInstance = Axios.create({
@@ -51,10 +52,15 @@ export const wordApi = {
 };
 
 export const todayApi = {
-  getResult: () =>
+  getResult: ({ articleId, summary }: PostSummary) =>
     // 수정 필요
     axiosInstance.post("api/v1/today/post", {
-      data: {},
+      userSummaryList: [
+        {
+          articleId: articleId,
+          summary: summary,
+        },
+      ],
     }),
   loadPassages: () => axiosInstance.get("api/v1/today/"),
 };

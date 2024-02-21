@@ -17,3 +17,27 @@ export const SummarySelector = selector({
     return set(SummaryAtom, newSummary);
   },
 });
+
+export const summaryResultListAtom = atom({
+  key: "summaryResultListAtom",
+  default: [
+    {
+      articleId: 0,
+      score1: 0,
+      score2: 0,
+      score3: 0,
+      score4: 0,
+      score5: 0,
+      score6: 0,
+      answer: "",
+    },
+  ],
+});
+
+export const summaryResultListSelector = selector({
+  key: "summaryResultListSelector",
+  get: ({ get }) => get(summaryResultListAtom),
+  set: ({ set }, newSummaryResultListAtom) => {
+    return set(summaryResultListAtom, newSummaryResultListAtom);
+  },
+});

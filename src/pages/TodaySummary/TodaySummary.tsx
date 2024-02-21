@@ -8,18 +8,42 @@ import FlexContainer from "@/components/common/flex-container";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { SummaryAtom } from "@/recoil/SummaryAtom";
+import { SummaryAtom, summaryResultListAtom } from "@/recoil/SummaryAtom";
+import { todayApi } from "@/apis/axiosInstance";
 
-export interface StageProps {
+interface StageProps {
   stage: number;
+}
+
+export interface PostSummary {
+  articleId: number;
+  summary: string;
 }
 
 const TodaySummary = ({ stage }: StageProps) => {
   const [input, setInput] = useState<string>("");
   const [recoilSummary, setRecoilSummary] = useRecoilState(SummaryAtom);
+  const [summaryResult, setSummaryResult] = useRecoilState(
+    summaryResultListAtom
+  );
   const [articleId, setArticleID] = useState<number>(0);
   const isLast = stage > 4 ? true : false;
   const navigate = useNavigate();
+
+  const PostSummaryList = (articleID: number) => {
+    const GetRes = todayApi.getResult({ articleId: articleID, summary: input });
+    GetRes.then((res) => {
+      if (recoilSummary[0].articleId == 0) {
+        setSummaryResult(res.data.result.summaryResultList);
+      } else {
+        console.log("artilce", articleID);
+        setSummaryResult((prev) => [
+          ...prev,
+          ...res.data.result.summaryResultList,
+        ]);
+      }
+    });
+  };
 
   return (
     <FlexContainer direction="column" gap={2}>
@@ -40,7 +64,7 @@ const TodaySummary = ({ stage }: StageProps) => {
             text={isLast ? "제출하기" : "다음 단계"}
             onClick={() => {
               if (stage < 5) {
-                console.log("input,", input);
+                PostSummaryList(articleId);
                 navigate(`/summary/${stage + 1}`);
                 if (recoilSummary[0].articleId == 0) {
                   setRecoilSummary([{ articleId: articleId, summary: input }]);
@@ -50,10 +74,11 @@ const TodaySummary = ({ stage }: StageProps) => {
                     { articleId: stage, summary: input },
                   ]);
                 }
-                console.log(recoilSummary);
               } else {
+                PostSummaryList(articleId);
                 navigate(`/summary/result`);
               }
+              console.log(summaryResult);
               setInput("");
               setArticleID(0);
             }}
