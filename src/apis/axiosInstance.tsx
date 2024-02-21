@@ -7,6 +7,10 @@ const axiosInstance = Axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
+    const access = localStorage.getItem("accessToken");
+    if (access) {
+      config.headers.Authorization = `Bearer ${access}`;
+    }
     return config;
   },
   (error) => {
@@ -52,7 +56,7 @@ export const todayApi = {
     axiosInstance.post("api/v1/today/post", {
       data: {},
     }),
-  loadPassages: () => axiosInstance.get("api/v1/today"),
+  loadPassages: () => axiosInstance.get("api/v1/today/"),
 };
 
 export const userApi = {

@@ -35,7 +35,11 @@ function Router() {
             <Route path="/stage/result" element={<StageResult />} />
 
             {/** 오늘의 요약 */}
-            <Route path="/summary/1" element={<TodaySummary />} />
+            <Route path="/summary/1" element={<TodaySummary stage={1} />} />
+            <Route path="/summary/2" element={<TodaySummary stage={2} />} />
+            <Route path="/summary/3" element={<TodaySummary stage={3} />} />
+            <Route path="/summary/4" element={<TodaySummary stage={4} />} />
+            <Route path="/summary/5" element={<TodaySummary stage={5} />} />
             <Route path="/summary/result" element={<SummaryResult />} />
 
             {/* 복습 노트 */}
