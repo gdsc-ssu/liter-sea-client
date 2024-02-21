@@ -22,7 +22,6 @@ const Text = ({ stage, setArticleID }: TProps) => {
       setArticleID(res.data.result.todayArticleList[stage - 1].articleId);
     });
   }, [stage]);
-  const title = "어디서 구할 수 있나요?";
 
   return (
     <FlexContainer
@@ -30,7 +29,6 @@ const Text = ({ stage, setArticleID }: TProps) => {
       alignItems="stretch"
       style={{ minWidth: "20rem" }}
     >
-      <div style={{ fontWeight: 600 }}>{title}</div>
       <TextBox>
         {splitData.map((el, idx) => {
           return (
