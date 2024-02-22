@@ -16,6 +16,8 @@ import Main from "./pages/Main/Main";
 import SignIn from "./pages/SignIn/SignIn";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import NotFound from "./pages/404/NotFound";
+import SigningIn from "./pages/SignIn/SigningIn";
+import SignOut from "./pages/SignOut/SignOut";
 
 function Router() {
   return (
@@ -24,7 +26,8 @@ function Router() {
       <Layout>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signout" element={<div>signout</div>} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="signingin" element={<SigningIn />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Main />} />

@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { UserInfoAtom } from "@/recoil/UserInfoAtom";
 
 const USER_INFO = {
-  todayComplete: 4,
+  todayComplete: 0,
   badgeName: "겁 없는 탐험가",
   boatName: "초심자의 배",
 };

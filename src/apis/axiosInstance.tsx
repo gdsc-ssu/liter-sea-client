@@ -62,7 +62,11 @@ export const todayApi = {
 };
 
 export const userApi = {
-  signIn: () => axiosInstance.get("api/v1/user/login"), //"api/v1/user/google-login"
+  signIn: () => axiosInstance.get("api/v1/user/login"),
+  GoogleSignIn: (code: string | null) =>
+    axiosInstance.get("api/v1/user/google-login", {
+      params: { code: code },
+    }),
 };
 
 export const reviewApi = {
