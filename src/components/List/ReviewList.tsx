@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 interface RLProps {
   number: number;
   title: string;
-  score: number;
 }
 
-const ReviewList = ({ number, title, score }: RLProps) => {
+const ReviewList = ({ number, title }: RLProps) => {
   const navigate = useNavigate();
   return (
     <FlexContainer
@@ -17,7 +16,6 @@ const ReviewList = ({ number, title, score }: RLProps) => {
     >
       <NumberBox>{number}</NumberBox>
       <TitleBox>{title}</TitleBox>
-      <ScoreBox>{score}</ScoreBox>
       <ArrowBox
         onClick={() => {
           navigate(`/review/${number}`);

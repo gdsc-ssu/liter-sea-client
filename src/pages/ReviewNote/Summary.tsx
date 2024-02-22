@@ -33,14 +33,14 @@ const Summary = () => {
         <Text splitData={splitData} />
       </FlexItem>
       <FlexItem fullWidth>
-        <Problem title={"내 요약"}>
+        <Problem height="15rem" title={"내 요약"}>
           <InputComponent
             placeholder="내 요약"
             input={input}
             setInput={setInput}
           />
         </Problem>
-        <Problem title={"모범 답안"}>
+        <Problem height="25rem" title={"모범 답안"}>
           <AnswerBox>{answer}</AnswerBox>
         </Problem>
         <FlexContainer fullWidth justifyContent="space-evenly">
@@ -59,6 +59,7 @@ const FlexItem = styled(FlexContainer).attrs({
   alignSelf: "stretch",
 })`
   flex: 1 1 40%;
+  margin-top: 2rem;
 `;
 
 const AnswerBox = styled.div`
