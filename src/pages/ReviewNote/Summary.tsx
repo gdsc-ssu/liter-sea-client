@@ -41,7 +41,7 @@ const Summary = () => {
             setInput={setInput}
           />
         </Problem>
-        <Problem height="25rem" title={"모범 답안"}>
+        <Problem height="33rem" title={"모범 답안"}>
           <AnswerBox>{answer}</AnswerBox>
         </Problem>
         <FlexContainer fullWidth justifyContent="space-evenly">
