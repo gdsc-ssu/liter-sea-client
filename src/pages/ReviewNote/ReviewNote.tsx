@@ -67,9 +67,6 @@ const ReviewNote = () => {
             <RLstyled.TitleBox style={{ fontWeight: 600 }}>
               제목
             </RLstyled.TitleBox>
-            <RLstyled.ScoreBox style={{ fontWeight: 600 }}>
-              점수
-            </RLstyled.ScoreBox>
             <RLstyled.ArrowBox />
           </ListTitle>
           {solveIdList.map((el, idx) => {
@@ -77,8 +74,7 @@ const ReviewNote = () => {
               <ReviewList
                 key={idx}
                 number={el}
-                title={solveDTO[el - 1]?.article.slice(0, 30) + "..."}
-                score={12}
+                title={solveDTO[el - 1]?.article.slice(0, 50) + "..."}
               />
             );
           })}
