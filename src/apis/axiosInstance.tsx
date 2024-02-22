@@ -67,13 +67,9 @@ export const userApi = {
 
 export const reviewApi = {
   loadReviewBySolvedId: (solve_id: number) =>
-    axiosInstance.get("api/v1/review", {
-      params: { query: solve_id },
-    }),
+    axiosInstance.get(`api/v1/review/${solve_id}`),
   loadReviewByCreateAt: (createAt: string) =>
-    axiosInstance.get("api/v1/review", {
-      params: { query: createAt },
-    }),
+    axiosInstance.get(`api/v1/review/solveIdList/${createAt}`),
   loadReview: () => axiosInstance.get("api/v1/review/test"),
   loadReviewDayList: () => axiosInstance.get("api/v1/review/test/dayList"),
 };
