@@ -3,12 +3,31 @@ import ReviewList, * as RLstyled from "@/components/List/ReviewList";
 import { COLORS } from "@/styles/colors";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FlexContainer from "@/components/common/flex-container";
+import { reviewApi } from "@/apis/axiosInstance";
+
 
 const ReviewNote = () => {
   const today = new Date();
   const [selectDate, setSelectDate] = useState<Date>(today);
+  const [solveIdList, setSolveIdList] = useState<number[]>([]);
+    {
+      article: "",
+      answer: "",
+      articleCategory: "",
+      userSummary: "",
+    },
+  ]);
+
+  useEffect(() => {
+    reviewApi
+      .loadReviewByCreateAt(selectDate.toISOString().slice(0, 10))
+      .then((res) => {
+        setSolveIdList(res.data);
+      });
+  }, [selectDate]);
+
   return (
     <FlexContainer direction="column" alignItems="stretch">
       <div style={{ fontWeight: 600 }}>복습 노트</div>
@@ -38,9 +57,15 @@ const ReviewNote = () => {
             </RLstyled.ScoreBox>
             <RLstyled.ArrowBox />
           </ListTitle>
-          <ReviewList number={1} title="sdf" score={12} />
-          <ReviewList number={1} title="sdf" score={12} />
-          <ReviewList number={1} title="sdf" score={12} />
+          {solveIdList.map((el, idx) => {
+            return (
+              <ReviewList
+                key={idx}
+                number={el}
+                score={12}
+              />
+            );
+          })}
         </ListBox>
       </FlexContainer>
     </FlexContainer>
