@@ -1,8 +1,9 @@
 import { COLORS } from "@/styles/colors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import VocaModal from "../VocaModal/VocaModal";
 import FlexContainer from "../common/flex-container";
+import { wordApi } from "@/apis/axiosInstance";
 
 interface TProps {
   splitData: string[];
@@ -10,6 +11,10 @@ interface TProps {
 
 const Text = ({ splitData }: TProps) => {
   const [clickedIdx, setIsClickedIdx] = useState(-1);
+  const [explain, setExplain] = useState<string>("");
+  useEffect(() => {
+    wordApi.saveWord(splitData[clickedIdx]).then((res) => setExplain(res.data));
+  }, [clickedIdx]);
 
   return (
     <FlexContainer
@@ -34,7 +39,9 @@ const Text = ({ splitData }: TProps) => {
           );
         })}
       </TextBox>
-      {clickedIdx > -1 && <VocaModal word={splitData[clickedIdx]} />}
+      {clickedIdx > -1 && (
+        <VocaModal word={splitData[clickedIdx]} explain={explain} />
+      )}
     </FlexContainer>
   );
 };
