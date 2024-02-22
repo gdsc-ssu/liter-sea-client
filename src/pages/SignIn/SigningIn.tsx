@@ -25,7 +25,6 @@ const SigningIn = () => {
       })
       .catch((error) => {
         console.log(error);
-        console.log("in useEffect");
       });
   }, []);
 

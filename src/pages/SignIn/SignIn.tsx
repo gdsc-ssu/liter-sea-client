@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { COLORS } from "@/styles/colors";
 import { userApi } from "@/apis/axiosInstance";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,10 +8,14 @@ import { useSetRecoilState } from "recoil";
 import GoogleIcon from "@/assets/SVGs/GoogleLogo.svg?react";
 import BlueButton from "@/components/Button/BlueButton";
 
+import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 const SignIn = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const setAccessToken = useSetRecoilState(TokenAtom);
+  const clientId = import.meta.env.VITE_CLIENT_ID;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,26 +39,14 @@ const SignIn = () => {
   }
 
   async function handleGoogleSignInButton() {
-    window.location.href = import.meta.env.VITE_GOOGLE_OAUTH_URL;
+    window.location.assign(import.meta.env.VITE_GOOGLE_OAUTH_URL);
   }
 
   return (
     <SignInContainer>
-      <SignInForm>
-        <InputID
-          value={id}
-          placeholder="id"
-          type="text"
-          onChange={(e) => setId(e.target.value)}
-        ></InputID>
-        <InputPW
-          value={pw}
-          placeholder="password"
-          type="text"
-          onChange={(e) => setPw(e.target.value)}
-        ></InputPW>
-        <BlueButton text={"로그인"} onClickFunc={handleSingInButton} />
-      </SignInForm>
+      <Title>
+        Improve Your Literacy <br /> with Litera-sea
+      </Title>
       <MaterialButton onClick={handleGoogleSignInButton}>
         <MaterialButtonContentWrapper>
           <MaterialButtonIcon>
@@ -76,38 +68,22 @@ const SignInContainer = styled.div`
   align-items: center;
 `;
 
-const SignInForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
+const changedColor = keyframes`    
+0% {color: ${COLORS.primary};}
+50% {color: ${COLORS.primaryDeep};}
+100% {color: ${COLORS.primary};}
 `;
 
-const InputID = styled.input`
-  width: 20rem;
-  color: ${COLORS.black};
-  background-color: ${COLORS.white};
-  border: 1px solid ${COLORS.lightGray};
-  border-radius: 0.8rem;
-  padding: 1rem;
-  font-size: 1.4rem;
-  min-height: 1rem;
-  margin-bottom: 20px;
-`;
-
-const InputPW = styled.input`
-  width: 20rem;
-  color: ${COLORS.black};
-  background-color: ${COLORS.white};
-  border: 1px solid ${COLORS.lightGray};
-  border-radius: 0.8rem;
-  padding: 1rem;
-  font-size: 1.4rem;
-  min-height: 1rem;
-  margin-bottom: 20px;
+const Title = styled.div`
+  margin: 10rem 0 4rem;
+  font-size: 50px;
+  text-align: center;
+  animation: ${changedColor} 2s linear infinite;
+  font-weight: bolder;
 `;
 
 const MaterialButton = styled.button`
+  transform: scale(1.6);
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -121,7 +97,7 @@ const MaterialButton = styled.button`
   cursor: pointer;
   font-family: "Roboto", arial, sans-serif;
   font-size: 14px;
-  height: 60px;
+  height: 40px;
   letter-spacing: 0.25px;
   outline: none;
   overflow: hidden;
