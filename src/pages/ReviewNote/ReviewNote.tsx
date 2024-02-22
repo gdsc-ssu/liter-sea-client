@@ -39,6 +39,7 @@ const ReviewNote = () => {
         Promise.all(promises).then((res) => {
           const newData = res.map((res) => res.data);
           setSolveDTO(newData);
+          console.log(newData);
         });
       });
   }, [selectDate]);
@@ -74,7 +75,7 @@ const ReviewNote = () => {
               <ReviewList
                 key={idx}
                 number={el}
-                title={solveDTO[el - 1]?.article.slice(0, 50) + "..."}
+                title={solveDTO[idx]?.article.slice(0, 50) + "..."}
               />
             );
           })}
