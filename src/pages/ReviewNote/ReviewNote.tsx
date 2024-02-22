@@ -7,11 +7,18 @@ import { useEffect, useState } from "react";
 import FlexContainer from "@/components/common/flex-container";
 import { reviewApi } from "@/apis/axiosInstance";
 
+type solveDTO = {
+  article: string;
+  answer: string;
+  articleCategory: string;
+  userSummary: string;
+};
 
 const ReviewNote = () => {
   const today = new Date();
   const [selectDate, setSelectDate] = useState<Date>(today);
   const [solveIdList, setSolveIdList] = useState<number[]>([]);
+  const [solveDTO, setSolveDTO] = useState<solveDTO[]>([
     {
       article: "",
       answer: "",
@@ -25,6 +32,14 @@ const ReviewNote = () => {
       .loadReviewByCreateAt(selectDate.toISOString().slice(0, 10))
       .then((res) => {
         setSolveIdList(res.data);
+        const promises = res.data.map((solveId: number) => {
+          return reviewApi.loadReviewBySolvedId(solveId);
+        });
+
+        Promise.all(promises).then((res) => {
+          const newData = res.map((res) => res.data);
+          setSolveDTO(newData);
+        });
       });
   }, [selectDate]);
 
@@ -62,6 +77,7 @@ const ReviewNote = () => {
               <ReviewList
                 key={idx}
                 number={el}
+                title={solveDTO[el - 1]?.article.slice(0, 30) + "..."}
                 score={12}
               />
             );
