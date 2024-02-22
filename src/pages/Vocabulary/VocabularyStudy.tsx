@@ -7,18 +7,17 @@ import { COLORS } from "@/styles/colors";
 import FlexContainer from "@/components/common/flex-container";
 
 const VocabularyStudy = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [index, setIndex] = useState(0);
   const [sec, setSec] = useState(5);
   const [isPlay, setIsPlay] = useState(true);
-  const [wordCardData, setWordCardData] = useState([]);
+  const wordCardData = location.state.contents;
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  useEffect(() => {
-    setWordCardData(location.state.contents);
-  }, [wordCardData]);
-
-  setInterval(handleNextCard, 5000);
+  if (isPlay) {
+    setInterval(handleNextCard, 5000);
+  }
 
   function handleGoToBack() {
     navigate(-1);
@@ -50,7 +49,7 @@ const VocabularyStudy = () => {
       <BackButton onClick={handleGoToBack} />
       <FlexContainer direction="column">
         <FlexContainer justifyContent="space-between">
-          <PageTitle>{location.state.title}</PageTitle>
+          <PageTitle>{location?.state.title}</PageTitle>
           <CurrentIndex>
             {index + 1} / {wordCardData.length}
           </CurrentIndex>
