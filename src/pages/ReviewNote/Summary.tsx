@@ -7,12 +7,13 @@ import { COLORS } from "@/styles/colors";
 import FlexContainer from "@/components/common/flex-container";
 import { useEffect, useState } from "react";
 import { reviewApi } from "@/apis/axiosInstance";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Summary = () => {
   const [splitData, setSplitData] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleOnClick = () => {};
   const pathId = useParams();
@@ -25,7 +26,7 @@ const Summary = () => {
       setInput(res.data.userSummary);
       setAnswer(res.data.answer);
     });
-  }, []);
+  }, [pathId.id]);
 
   return (
     <FlexContainer gap={2} wrap="wrap">
@@ -44,9 +45,25 @@ const Summary = () => {
           <AnswerBox>{answer}</AnswerBox>
         </Problem>
         <FlexContainer fullWidth justifyContent="space-evenly">
-          <ArrowBox>이전</ArrowBox>
+          <ArrowBox
+            onClick={() => {
+              if (Number(pathId.id) > 1) {
+                navigate(`/review/${Number(pathId.id) - 1}`);
+              }
+            }}
+            style={{ cursor: Number(pathId.id) > 1 ? "pointer" : "" }}
+          >
+            이전
+          </ArrowBox>
           <BlueButton text="핵심문장 찾기" onClickFunc={handleOnClick} />
-          <ArrowBox>다음</ArrowBox>
+          <ArrowBox
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              navigate(`/review/${Number(pathId.id) + 1}`);
+            }}
+          >
+            다음
+          </ArrowBox>
         </FlexContainer>
       </FlexItem>
     </FlexContainer>
