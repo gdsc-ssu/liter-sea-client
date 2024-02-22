@@ -51,7 +51,7 @@ export const ScoreBox = styled.div`
 export const ArrowBox = styled.div`
   display: flex;
   justify-content: center;
-
+  cursor: pointer;
   font-size: 1.4rem;
 `;
 
