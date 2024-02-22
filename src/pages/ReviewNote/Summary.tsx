@@ -8,11 +8,16 @@ import FlexContainer from "@/components/common/flex-container";
 import { useEffect, useState } from "react";
 import { reviewApi } from "@/apis/axiosInstance";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { VocaIdxAtom, VocaModalAtom } from "@/recoil/VocaModalAtom";
 
 const Summary = () => {
   const [splitData, setSplitData] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
+  const [isOpen, setIsOpen] = useRecoilState(VocaModalAtom);
+  const [recoilIdx, setRecoilIdx] = useRecoilState(VocaIdxAtom);
+
   const navigate = useNavigate();
 
   const handleOnClick = () => {};
@@ -49,6 +54,8 @@ const Summary = () => {
             onClick={() => {
               if (Number(pathId.id) > 1) {
                 navigate(`/review/${Number(pathId.id) - 1}`);
+                setRecoilIdx(-1);
+                setIsOpen(false);
               }
             }}
             style={{ cursor: Number(pathId.id) > 1 ? "pointer" : "" }}
@@ -59,6 +66,9 @@ const Summary = () => {
           <ArrowBox
             style={{ cursor: "pointer" }}
             onClick={() => {
+              setIsOpen(false);
+              setRecoilIdx(-1);
+
               navigate(`/review/${Number(pathId.id) + 1}`);
             }}
           >

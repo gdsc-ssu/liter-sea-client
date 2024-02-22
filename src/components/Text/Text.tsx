@@ -4,6 +4,8 @@ import styled from "styled-components";
 import VocaModal from "../VocaModal/VocaModal";
 import FlexContainer from "../common/flex-container";
 import { wordApi } from "@/apis/axiosInstance";
+import { useRecoilState } from "recoil";
+import { VocaIdxAtom, VocaModalAtom } from "@/recoil/VocaModalAtom";
 
 interface TProps {
   splitData: string[];
@@ -12,6 +14,8 @@ interface TProps {
 const Text = ({ splitData }: TProps) => {
   const [clickedIdx, setIsClickedIdx] = useState(-1);
   const [explain, setExplain] = useState<string>("");
+  const [isOpen, setIsOpen] = useRecoilState(VocaModalAtom);
+  const [recoilIdx, setRecoilIdx] = useRecoilState(VocaIdxAtom);
   useEffect(() => {
     wordApi.saveWord(splitData[clickedIdx]).then((res) => setExplain(res.data));
   }, [clickedIdx]);
@@ -28,9 +32,11 @@ const Text = ({ splitData }: TProps) => {
             <>
               <Word
                 id="ClickedSpan"
-                clicked={idx === clickedIdx}
+                clicked={recoilIdx != -1 && idx === clickedIdx}
                 onClick={() => {
                   setIsClickedIdx(idx);
+                  setRecoilIdx(idx);
+                  setIsOpen(true);
                 }}
               >
                 {el}
@@ -39,7 +45,7 @@ const Text = ({ splitData }: TProps) => {
           );
         })}
       </TextBox>
-      {clickedIdx > -1 && (
+      {clickedIdx > -1 && isOpen && (
         <VocaModal word={splitData[clickedIdx]} explain={explain} />
       )}
     </FlexContainer>
